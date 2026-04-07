@@ -1,19 +1,17 @@
 from pathlib import Path
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a0f)e9xqxe1g5!%)3oaoinibkd^ize=e^tuu@j4w6q!tl$2j5_'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -100,8 +98,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
 STATIC_URL = 'static/'
+
+# Car model constraints
+CAR_YEAR_MIN = 1900
+CAR_NAME_MAX_LENGTH = 100
+CAR_CHOICE_MAX_LENGTH = 20
+CAR_PRICE_MIN = 1
+SERVICE_PRICE_MIN = 1
+SERVICE_NAME_MAX_LENGTH = 200
