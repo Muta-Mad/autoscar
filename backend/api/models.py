@@ -17,6 +17,7 @@ class Car(models.Model):
     transmission = models.CharField(verbose_name='Трансмиссия')
     created_at = models.DateField(verbose_name='Опубликовано', auto_now_add=True)
     on_main_page = models.BooleanField(verbose_name='На главную', default=False)
+    available = models.BooleanField(verbose_name='В наличии', default=True)
 
 
 class Category(models.Model):
