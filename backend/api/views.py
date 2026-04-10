@@ -8,10 +8,23 @@ from api.models import Car
 
 class CarListView(APIView):# Каталог
     def get(self, request):
-        cars = Car.objects.all()
-        serialazer = CarSerializer(cars, many=True)
-        return Response(data=serialazer.data)
+        query_set = Car.objects.all()
+        color = request.query_params.get('color')
+        available = request.query_params.get('available')
+        valid_available = [True, False]
+        
+        if color:
+            query_set = query_set.filter(color=color)
+            serialazer = CarSerializer(query_set, many=True)
+            return Response(serialazer.data)
+        if available and valid_available:
+            query_set = query_set.filter(available=available)
+            serialazer = CarSerializer(query_set, many=True)
+            return Response(serialazer.data)
 
+        else:
+            serialazer = CarSerializer(query_set, many=True)
+            return Response(serialazer.data)
 
 class CarDetailView(APIView):
     def get(self, request, id):

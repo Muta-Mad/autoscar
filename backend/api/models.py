@@ -118,6 +118,7 @@ class Car(models.Model):
         blank=True,
         null=True,
     )
+    available = models.BooleanField(verbose_name='В наличии', default=True)
 
     class Meta:
         verbose_name = 'Автомобиль'
