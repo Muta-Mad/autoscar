@@ -1,6 +1,5 @@
 from django.db import models
-from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from api.constants import (
     CAR_YEAR_MIN,
     CAR_NAME_MAX_LENGTH,
@@ -8,16 +7,8 @@ from api.constants import (
     CAR_PRICE_MIN,
     SERVICE_PRICE_MIN,
     SERVICE_NAME_MAX_LENGTH,
+    CAR_YEAR_MAX
 )
-import datetime
-
-
-def validate_year(value):
-    current = datetime.date.today().year
-    if value < CAR_YEAR_MIN:
-        raise ValidationError(f'Год не может быть раньше {CAR_YEAR_MIN}')
-    if value > current + 1:
-        raise ValidationError(f'Год не может быть больше {current + 1}')
 
 
 class BodyType(models.TextChoices):
@@ -76,7 +67,7 @@ class Car(models.Model):
                              max_length=CAR_NAME_MAX_LENGTH)
     year = models.IntegerField(
         verbose_name='Год выпуска',
-        validators=[validate_year],
+        validators=[MinValueValidator(CAR_YEAR_MIN, message=f'год не может быть меньше чем:{CAR_YEAR_MIN}'), MaxValueValidator(CAR_YEAR_MAX, message=f'год не может быть больше чем:{CAR_YEAR_MAX}')]
     )
     color = models.CharField(
         verbose_name='Цвет',
