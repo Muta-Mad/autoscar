@@ -1,7 +1,6 @@
-from datetime import datetime 
+from datetime import datetime
 
 CAR_YEAR_MAX = datetime.now().year
-print(CAR_YEAR_MAX)
 CAR_YEAR_MIN = 1900
 CAR_NAME_MAX_LENGTH = 100
 CAR_CHOICE_MAX_LENGTH = 20
