@@ -92,11 +92,9 @@ class Car(models.Model):
         choices=BodyType.choices,
     )
 
-    engine_capacity = models.IntegerField(
-        verbose_name='Объем двигателя',
-        validators=[MinValueValidator(
-            0.1, message='Объем двигателя должен быть положительным')])
-    
+    engine_capacity = models.PositiveIntegerField(
+        verbose_name='Объем двигателя'
+    )
     price = models.IntegerField(
         verbose_name='Цена (Euro)',
         validators=[MinValueValidator(
