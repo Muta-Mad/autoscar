@@ -5,9 +5,6 @@ from api.constants import (
     CAR_YEAR_MIN,
     CAR_NAME_MAX_LENGTH,
     CAR_CHOICE_MAX_LENGTH,
-    CAR_PRICE_MIN,
-    SERVICE_PRICE_MIN,
-    SERVICE_NAME_MAX_LENGTH,
     CAR_YEAR_MAX
 )
 
@@ -62,10 +59,16 @@ class EcoSticker(models.TextChoices):
 
 
 class Car(models.Model):
-    brand = models.ForeignKey('Brand', on_delete=models.CASCADE, verbose_name='Марка')
+    brand = models.ForeignKey(
+        'Brand', 
+        on_delete=models.CASCADE, 
+        verbose_name='Марка'
+    )
     
-    model = models.CharField(verbose_name='Модель',
-                             max_length=CAR_NAME_MAX_LENGTH)
+    model = models.CharField(
+        verbose_name='Модель',
+        max_length=CAR_NAME_MAX_LENGTH
+    )
     
     year = models.IntegerField(
         verbose_name='Год выпуска',
@@ -95,26 +98,37 @@ class Car(models.Model):
     engine_capacity = models.PositiveIntegerField(
         verbose_name='Объем двигателя'
     )
-    price = models.IntegerField(
-        verbose_name='Цена (Euro)',
-        validators=[MinValueValidator(
-            CAR_PRICE_MIN, message='Цена должна быть положительной')],
+
+    price = models.PositiveIntegerField(
+        verbose_name='Цена (Euro)'
     )
-    is_sold = models.BooleanField(verbose_name='Продано', default=False)
+    
+    is_sold = models.BooleanField(
+        verbose_name='Продано', 
+        default=False
+    )
+
     fuel = models.CharField(
         verbose_name='Тип топлива',
         max_length=CAR_CHOICE_MAX_LENGTH,
         choices=FuelType.choices,
     )
+
     transmission = models.CharField(
         verbose_name='Трансмиссия',
         max_length=CAR_CHOICE_MAX_LENGTH,
         choices=Transmission.choices,
     )
     created_at = models.DateField(
-        verbose_name='Опубликовано', auto_now_add=True)
+        verbose_name='Опубликовано', 
+        auto_now_add=True
+    )
+    
     on_main_page = models.BooleanField(
-        verbose_name='На главную', default=False)
+        verbose_name='На главную', 
+        default=False
+    )
+    
     eco_sticker = models.CharField(
         verbose_name='Эконаклейка',
         max_length=CAR_CHOICE_MAX_LENGTH,
@@ -122,7 +136,9 @@ class Car(models.Model):
         blank=True,
         null=True,
     )
-    available = models.BooleanField(verbose_name='В наличии', default=True)
+    available = models.BooleanField(
+        verbose_name='В наличии', default=True
+    )
 
     class Meta:
         verbose_name = 'Автомобиль'
@@ -146,9 +162,13 @@ class Brand(models.Model):
 
     
 class Category(models.Model):
-    name = models.CharField(verbose_name='Название',
-                            max_length=CAR_NAME_MAX_LENGTH)
-    is_active = models.BooleanField(verbose_name='Активна', default=True)
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=CAR_NAME_MAX_LENGTH
+    )
+    is_active = models.BooleanField(
+        verbose_name='Активна', default=True
+    )
 
     class Meta:
         verbose_name = 'Категория'
@@ -160,13 +180,17 @@ class Category(models.Model):
 
 class Service(models.Model):
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, verbose_name='Категория')
-    name = models.CharField(verbose_name='Название',
-                            max_length=SERVICE_NAME_MAX_LENGTH)
-    price = models.IntegerField(
+        Category, 
+        on_delete=models.CASCADE, 
+        verbose_name='Категория'
+    )
+    
+    name = models.CharField(
+        verbose_name='Название',
+    )
+
+    price = models.PositiveIntegerField(
         verbose_name='Цена',
-        validators=[MinValueValidator(
-            SERVICE_PRICE_MIN, message='Цена должна быть положительной')],
     )
 
     class Meta:
