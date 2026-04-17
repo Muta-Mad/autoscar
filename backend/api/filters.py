@@ -16,8 +16,8 @@ def get_filters(query_set, query_params):
         query_set = query_set.filter(engine=engine)
     if fuel:
         query_set = query_set.filter(fuel=fuel)
-    if price_min is not None:
+    if price_min:
         query_set = query_set.filter(price__gte=price_min)
-    if price_max is not None:
+    if price_max:
         query_set = query_set.filter(price__lte=price_max)
     return query_set

@@ -14,7 +14,8 @@ class CarListView(APIView):# Каталог
         if query_params:
             query_set = get_filters(query_set, query_params)
             serializer = CarSerializer(query_set, many=True)
-        return Response(serializer.data)
+        serializer = CarSerializer(query_set, many=True)
+        return Response(data=serializer.data)
 
 
 class CarDetailView(APIView):
@@ -29,3 +30,4 @@ class CarMain(APIView):
         cars = Car.objects.filter(on_main_page=True)
         serializer = CarSerializer(cars, many=True)
         return Response(data=serializer.data)
+

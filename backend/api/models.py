@@ -119,6 +119,7 @@ class Car(models.Model):
         max_length=CAR_CHOICE_MAX_LENGTH,
         choices=Transmission.choices,
     )
+
     created_at = models.DateField(
         verbose_name='Опубликовано', 
         auto_now_add=True
@@ -136,9 +137,19 @@ class Car(models.Model):
         blank=True,
         null=True,
     )
+
     available = models.BooleanField(
         verbose_name='В наличии', default=True
     )
+
+    description = models.TextField(
+        verbose_name='Описание'
+    )
+
+    mileage = models.PositiveBigIntegerField(
+        verbose_name='Пробег'
+    )
+
 
     class Meta:
         verbose_name = 'Автомобиль'
@@ -166,6 +177,7 @@ class Category(models.Model):
         verbose_name='Название',
         max_length=CAR_NAME_MAX_LENGTH
     )
+
     is_active = models.BooleanField(
         verbose_name='Активна', default=True
     )
