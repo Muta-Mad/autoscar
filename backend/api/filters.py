@@ -6,7 +6,7 @@ def get_filters(query_set, query_params):
     fuel = query_params.get('fuel')
     price_min = query_params.get('price_min')
     price_max = query_params.get('price_max')
-
+    brand = query_params.get('brand')
 
     if color:
         query_set = query_set.filter(color=color)
@@ -17,7 +17,16 @@ def get_filters(query_set, query_params):
     if fuel:
         query_set = query_set.filter(fuel=fuel)
     if price_min:
-        query_set = query_set.filter(price__gte=price_min)
+        try:
+            query_set = query_set.filter(price__gte=price_min)
+        except:
+            ValueError()
     if price_max:
         query_set = query_set.filter(price__lte=price_max)
+        try:
+            query_set = query_set.filter(price__gte=price_min)
+        except:
+            ValueError()
+    if brand:
+        query_set = query_set.filter(brand=brand)
     return query_set

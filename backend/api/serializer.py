@@ -8,5 +8,7 @@ class CarSerializer(serializers.ModelSerializer):
         model = Car
         fields = (
             'id', 'brand', 'model', 'year', 'color', 'body_type', 
-            'engine', 'price', 'is_sold', 'fuel', 'transmission', 'created_at', 'available'
+            'price', 'is_sold', 'fuel', 'transmission', 'created_at', 
+            'available', 'on_main_page', 'eco_sticker', 'engine_capacity',
+            'mileage', 'description'
         )
