@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+
 from api.constants import (
     CAR_YEAR_MIN,
     CAR_NAME_MAX_LENGTH,
@@ -61,27 +62,41 @@ class EcoSticker(models.TextChoices):
 
 
 class Car(models.Model):
-    brand = models.CharField(verbose_name='Марка',
-                             max_length=CAR_NAME_MAX_LENGTH)
+    brand = models.ForeignKey('Brand', on_delete=models.CASCADE, verbose_name='Марка')
+    
     model = models.CharField(verbose_name='Модель',
                              max_length=CAR_NAME_MAX_LENGTH)
+    
     year = models.IntegerField(
         verbose_name='Год выпуска',
-        validators=[MinValueValidator(CAR_YEAR_MIN, message=f'год не может быть меньше чем:{CAR_YEAR_MIN}'), MaxValueValidator(CAR_YEAR_MAX, message=f'год не может быть больше чем:{CAR_YEAR_MAX}')]
+        validators=[
+            MinValueValidator(
+                CAR_YEAR_MIN, message=f'год не может быть меньше чем:{CAR_YEAR_MIN}'
+            ), 
+            MaxValueValidator(
+                CAR_YEAR_MAX, message=f'год не может быть больше чем:{CAR_YEAR_MAX}'
+            )
+        ]
     )
+
     color = models.CharField(
         verbose_name='Цвет',
         max_length=CAR_CHOICE_MAX_LENGTH,
         choices=Color.choices,
         default=Color.OTHER,
     )
+
     body_type = models.CharField(
         verbose_name='Тип кузова',
         max_length=CAR_CHOICE_MAX_LENGTH,
         choices=BodyType.choices,
     )
-    engine = models.CharField(verbose_name='Двигатель',
-                              max_length=CAR_NAME_MAX_LENGTH)
+
+    engine_capacity = models.IntegerField(
+        verbose_name='Объем двигателя',
+        validators=[MinValueValidator(
+            0.1, message='Объем двигателя должен быть положительным')])
+    
     price = models.IntegerField(
         verbose_name='Цена (Euro)',
         validators=[MinValueValidator(
@@ -117,8 +132,21 @@ class Car(models.Model):
 
     def __str__(self) -> str:
         return f'{self.brand} {self.model} ({self.year})'
+    
+class Brand(models.Model):
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=CAR_NAME_MAX_LENGTH
+    )
 
+    class Meta:
+        verbose_name = 'Марка'
+        verbose_name_plural = 'Марки'
 
+    def __str__(self) -> str:
+        return self.name
+
+    
 class Category(models.Model):
     name = models.CharField(verbose_name='Название',
                             max_length=CAR_NAME_MAX_LENGTH)
