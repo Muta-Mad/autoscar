@@ -4,19 +4,19 @@ from django.shortcuts import get_object_or_404
 
 from api.serializer import CarSerializer
 from api.models import Car
-from api.filters import get_filters
+from api.filters import CarFilterSet
 
 
 class CarListView(APIView):# Каталог
     def get(self, request):
         query_set = Car.objects.all()
         query_params = request.query_params
+        query_set = CarFilterSet(query_params, queryset=query_set)
         if query_params:
-            query_set = get_filters(query_set, query_params)
-            serializer = CarSerializer(query_set, many=True)
-            return Response(data=serializer.data)
+            query_set = query_set.qs
         serializer = CarSerializer(query_set, many=True)
         return Response(data=serializer.data)
+
 
 
 class CarDetailView(APIView):
