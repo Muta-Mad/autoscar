@@ -11,9 +11,11 @@ class CarListView(APIView):# Каталог
     def get(self, request):
         query_set = Car.objects.all()
         query_params = request.query_params
-        query_set = CarFilterSet(query_params, queryset=query_set)
         if query_params:
+            query_set = CarFilterSet(query_params, queryset=query_set)
             query_set = query_set.qs
+            serializer = CarSerializer(query_set, many=True)
+            return Response(data=serializer.data)
         serializer = CarSerializer(query_set, many=True)
         return Response(data=serializer.data)
 
