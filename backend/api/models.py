@@ -150,6 +150,12 @@ class Car(models.Model):
         verbose_name='Пробег'
     )
 
+    image = models.ImageField(
+        verbose_name='Главное фото',
+        upload_to='cars/main/',
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = 'Автомобиль'
@@ -159,6 +165,26 @@ class Car(models.Model):
     def __str__(self) -> str:
         return f'{self.brand} {self.model} ({self.year})'
     
+class CarImage(models.Model):
+    car = models.ForeignKey(
+        Car,
+        on_delete=models.CASCADE,
+        related_name='images',
+        verbose_name='Автомобиль'
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='cars/gallery/',
+    )
+
+    class Meta:
+        verbose_name = 'Фото'
+        verbose_name_plural = 'Фотографии'
+
+    def __str__(self) -> str:
+        return f'Фото {self.car}'
+
+
 class Brand(models.Model):
     name = models.CharField(
         verbose_name='Название',

@@ -1,4 +1,4 @@
-from django_filters import FilterSet, NumberFilter, BooleanFilter
+from django_filters import FilterSet, NumberFilter, BooleanFilter, OrderingFilter
 
 from api.models import Car
 
@@ -8,7 +8,11 @@ class CarFilterSet(FilterSet):
     max_price = NumberFilter(field_name='price', lookup_expr='lte')
     year = NumberFilter(field_name='year')
     available = BooleanFilter(field_name='available')
-
+    ordering = OrderingFilter(
+        fields=(
+            ('price', 'price'),
+        )
+    )
 
     class Meta:
         model = Car
