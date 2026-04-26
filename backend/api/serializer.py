@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.models import Car, CarImage
+from api.models import Car, CarImage, Category, Service
 
 
 class CarImageSerializer(serializers.ModelSerializer):
@@ -20,3 +20,17 @@ class CarSerializer(serializers.ModelSerializer):
             'available', 'on_main_page', 'eco_sticker', 'engine_capacity',
             'mileage', 'description', 'image', 'images'
         )
+
+
+class ServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Service
+        fields = ('id', 'name', 'price', 'category')
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    services = ServiceSerializer(many=True, read_only=True, source='service_set')
+
+    class Meta:
+        model = Category
+        fields = ('id', 'name', 'is_active', 'services')
