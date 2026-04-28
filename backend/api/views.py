@@ -2,8 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
-from api.serializer import CarSerializer
-from api.models import Car
+from api.serializer import CarSerializer, CategorySerializer
+from api.models import Car, Category
 from api.filters import CarFilterSet
 
 
@@ -32,5 +32,12 @@ class CarMain(APIView):
     def get(self, request):
         cars = Car.objects.filter(on_main_page=True)
         serializer = CarSerializer(cars, many=True)
+        return Response(data=serializer.data)
+
+
+class CategoryListView(APIView):
+    def get(self, request):
+        categories = Category.objects.filter(is_active=True)
+        serializer = CategorySerializer(categories, many=True)
         return Response(data=serializer.data)
 
