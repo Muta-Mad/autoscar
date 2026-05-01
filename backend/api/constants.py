@@ -1,4 +1,7 @@
-from datetime import datetime 
+from datetime import datetime
+
+PAGE_SIZE = 12
+MAX_PAGE_SIZE = 48
 
 CAR_YEAR_MAX = datetime.now().year
 CAR_YEAR_MIN = 1900
