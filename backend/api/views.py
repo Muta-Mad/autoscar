@@ -5,24 +5,23 @@ from django.shortcuts import get_object_or_404
 from api.serializer import CarSerializer, CategorySerializer
 from api.models import Car, Category
 from api.filters import CarFilterSet
-from api.pagination import CarPagination
+from api.pagination import PageNumberPagination
 
 
 class CarListView(APIView):# Каталог
     def get(self, request):
-        query_set = Car.objects.select_related('brand').prefetch_related('images')
-        query_params = request.query_params
-        if query_params:
-            query_set = CarFilterSet(query_params, queryset=query_set)
-            query_set = query_set.qs
+        queryset = Car.objects.select_related('brand').prefetch_related('images')
 
-        paginator = CarPagination()
-        page = paginator.paginate_queryset(query_set, request)
+        car_filter = CarFilterSet(request.query_params, queryset=queryset)
+        queryset = car_filter.qs
+
+        paginator = PageNumberPagination()
+        page = paginator.paginate_queryset(queryset, request)
         if page is not None:
             serializer = CarSerializer(page, many=True)
             return paginator.get_paginated_response(serializer.data)
 
-        serializer = CarSerializer(query_set, many=True)
+        serializer = CarSerializer(queryset, many=True)
         return Response(data=serializer.data)
 
 
