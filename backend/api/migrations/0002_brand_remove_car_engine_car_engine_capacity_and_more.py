@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('api', '0001_initial'),
     ]
@@ -15,7 +14,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Brand',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('name', models.CharField(max_length=100, verbose_name='Название')),
             ],
             options={
@@ -30,17 +37,33 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='car',
             name='engine_capacity',
-            field=models.PositiveIntegerField(default=1, verbose_name='Объем двигателя'),
+            field=models.PositiveIntegerField(
+                default=1, verbose_name='Объем двигателя'
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='car',
             name='year',
-            field=models.IntegerField(validators=[django.core.validators.MinValueValidator(1900, message='год не может быть меньше чем:1900'), django.core.validators.MaxValueValidator(2026, message='год не может быть больше чем:2026')], verbose_name='Год выпуска'),
+            field=models.IntegerField(
+                validators=[
+                    django.core.validators.MinValueValidator(
+                        1900, message='год не может быть меньше чем:1900'
+                    ),
+                    django.core.validators.MaxValueValidator(
+                        2026, message='год не может быть больше чем:2026'
+                    ),
+                ],
+                verbose_name='Год выпуска',
+            ),
         ),
         migrations.AlterField(
             model_name='car',
             name='brand',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.brand', verbose_name='Марка'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='api.brand',
+                verbose_name='Марка',
+            ),
         ),
     ]

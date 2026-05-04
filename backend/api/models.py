@@ -5,7 +5,7 @@ from api.constants import (
     CAR_YEAR_MIN,
     CAR_NAME_MAX_LENGTH,
     CAR_CHOICE_MAX_LENGTH,
-    CAR_YEAR_MAX
+    CAR_YEAR_MAX,
 )
 
 
@@ -59,27 +59,20 @@ class EcoSticker(models.TextChoices):
 
 
 class Car(models.Model):
-    brand = models.ForeignKey(
-        'Brand', 
-        on_delete=models.CASCADE, 
-        verbose_name='Марка'
-    )
-    
-    model = models.CharField(
-        verbose_name='Модель',
-        max_length=CAR_NAME_MAX_LENGTH
-    )
-    
+    brand = models.ForeignKey('Brand', on_delete=models.CASCADE, verbose_name='Марка')
+
+    model = models.CharField(verbose_name='Модель', max_length=CAR_NAME_MAX_LENGTH)
+
     year = models.IntegerField(
         verbose_name='Год выпуска',
         validators=[
             MinValueValidator(
                 CAR_YEAR_MIN, message=f'год не может быть меньше чем:{CAR_YEAR_MIN}'
-            ), 
+            ),
             MaxValueValidator(
                 CAR_YEAR_MAX, message=f'год не может быть больше чем:{CAR_YEAR_MAX}'
-            )
-        ]
+            ),
+        ],
     )
 
     color = models.CharField(
@@ -95,18 +88,11 @@ class Car(models.Model):
         choices=BodyType.choices,
     )
 
-    engine_capacity = models.PositiveIntegerField(
-        verbose_name='Объем двигателя'
-    )
+    engine_capacity = models.PositiveIntegerField(verbose_name='Объем двигателя')
 
-    price = models.PositiveIntegerField(
-        verbose_name='Цена (Euro)'
-    )
-    
-    is_sold = models.BooleanField(
-        verbose_name='Продано', 
-        default=False
-    )
+    price = models.PositiveIntegerField(verbose_name='Цена (Euro)')
+
+    is_sold = models.BooleanField(verbose_name='Продано', default=False)
 
     fuel = models.CharField(
         verbose_name='Тип топлива',
@@ -120,16 +106,10 @@ class Car(models.Model):
         choices=Transmission.choices,
     )
 
-    created_at = models.DateField(
-        verbose_name='Опубликовано', 
-        auto_now_add=True
-    )
-    
-    on_main_page = models.BooleanField(
-        verbose_name='На главную', 
-        default=False
-    )
-    
+    created_at = models.DateField(verbose_name='Опубликовано', auto_now_add=True)
+
+    on_main_page = models.BooleanField(verbose_name='На главную', default=False)
+
     eco_sticker = models.CharField(
         verbose_name='Эконаклейка',
         max_length=CAR_CHOICE_MAX_LENGTH,
@@ -138,17 +118,11 @@ class Car(models.Model):
         null=True,
     )
 
-    available = models.BooleanField(
-        verbose_name='В наличии', default=True
-    )
+    available = models.BooleanField(verbose_name='В наличии', default=True)
 
-    description = models.TextField(
-        verbose_name='Описание'
-    )
+    description = models.TextField(verbose_name='Описание')
 
-    mileage = models.PositiveBigIntegerField(
-        verbose_name='Пробег'
-    )
+    mileage = models.PositiveBigIntegerField(verbose_name='Пробег')
 
     image = models.ImageField(
         verbose_name='Главное фото',
@@ -162,15 +136,13 @@ class Car(models.Model):
         verbose_name_plural = 'Автомобили'
         ordering = ('price',)
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f'{self.brand} {self.model} ({self.year})'
-    
+
+
 class CarImage(models.Model):
     car = models.ForeignKey(
-        Car,
-        on_delete=models.CASCADE,
-        related_name='images',
-        verbose_name='Автомобиль'
+        Car, on_delete=models.CASCADE, related_name='images', verbose_name='Автомобиль'
     )
     image = models.ImageField(
         verbose_name='Фото',
@@ -181,49 +153,42 @@ class CarImage(models.Model):
         verbose_name = 'Фото'
         verbose_name_plural = 'Фотографии'
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f'Фото {self.car}'
 
 
 class Brand(models.Model):
-    name = models.CharField(
-        verbose_name='Название',
-        max_length=CAR_NAME_MAX_LENGTH
-    )
+    name = models.CharField(verbose_name='Название', max_length=CAR_NAME_MAX_LENGTH)
 
     class Meta:
         verbose_name = 'Марка'
         verbose_name_plural = 'Марки'
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
-    
-class Category(models.Model):
-    name = models.CharField(
-        verbose_name='Название',
-        max_length=CAR_NAME_MAX_LENGTH
-    )
 
-    is_active = models.BooleanField(
-        verbose_name='Активна', default=True
-    )
+class Category(models.Model):
+    name = models.CharField(verbose_name='Название', max_length=CAR_NAME_MAX_LENGTH)
+
+    is_active = models.BooleanField(verbose_name='Активна', default=True)
 
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
 
 class Service(models.Model):
     category = models.ForeignKey(
-        Category, 
-        on_delete=models.CASCADE, 
-        verbose_name='Категория'
+        Category,
+        on_delete=models.CASCADE,
+        verbose_name='Категория',
+        related_name='service',
     )
-    
+
     name = models.CharField(
         verbose_name='Название',
     )
@@ -236,5 +201,5 @@ class Service(models.Model):
         verbose_name = 'Услуга'
         verbose_name_plural = 'Услуги'
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
