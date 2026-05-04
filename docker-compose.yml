@@ -2,6 +2,7 @@ volumes:
   media:
   static:
   redis_data:
+  pg_data:
 
 services:
   redis:
@@ -9,14 +10,35 @@ services:
     container_name: redis
     volumes:
       - redis_data:/data
+    env_file: ./.env
     ports:
       - "6379:6379"
+    networks:
+    - postgres-net
+
+  db:
+    image: "postgres:17-alpine"
+    container_name: db
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    env_file: ./.env
+    networks:
+    - postgres-net
+
   backend:
     build: ./backend/
     container_name: backend
     env_file: ./.env
     depends_on:
       - redis
+      - db
     volumes:
       - static:/backend_static
       - media:/app/media/
+    ports:
+    - "8000:8000"
+    networks:
+    - postgres-net
+
+networks:
+  postgres-net:

@@ -6,7 +6,7 @@ from api.models import Car, CarImage, Category, Service
 class CarImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarImage
-        fields = ('id', 'image')
+        fields = ('image')
 
 
 class CarSerializer(serializers.ModelSerializer):
@@ -15,7 +15,6 @@ class CarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
         fields = (
-            'id',
             'brand',
             'model',
             'year',
@@ -40,7 +39,7 @@ class CarSerializer(serializers.ModelSerializer):
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
-        fields = ('id', 'name', 'price', 'category')
+        fields = ('name', 'price', 'category')
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -48,4 +47,4 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('id', 'name', 'is_active', 'services')
+        fields = ('name', 'is_active', 'services')
