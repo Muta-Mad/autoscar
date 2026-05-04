@@ -1,47 +1,60 @@
+import time
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from api.serializer import CarSerializer, CategorySerializer
 from api.models import Car, Category
 from api.filters import CarFilterSet
 from api.pagination import PageNumberPagination
+from api.constants import CACHE_EXPIRATION
 
 
-class CarListView(APIView):# Каталог
+class CarListView(APIView):
+    @method_decorator(cache_page(CACHE_EXPIRATION))
     def get(self, request):
+        time.sleep(5)# имитация нагрузки
+        print('Новый запрос в базу данных..')
         queryset = Car.objects.select_related('brand').prefetch_related('images')
-
         car_filter = CarFilterSet(request.query_params, queryset=queryset)
         queryset = car_filter.qs
-
         paginator = PageNumberPagination()
         page = paginator.paginate_queryset(queryset, request)
         if page is not None:
             serializer = CarSerializer(page, many=True)
-            return paginator.get_paginated_response(serializer.data)
-
+            return paginator.get_paginated_response(serializer.data)    
         serializer = CarSerializer(queryset, many=True)
         return Response(data=serializer.data)
 
 
-
 class CarDetailView(APIView):
+    @method_decorator(cache_page(CACHE_EXPIRATION))
     def get(self, request, id):
+        time.sleep(5)# имитация нагрузки
+        print('Новый запрос в базу данных..')
         car = get_object_or_404(Car, id=id)
         serializer = CarSerializer(car)
         return Response(data=serializer.data)
 
 
 class CarMain(APIView):
+    @method_decorator(cache_page(CACHE_EXPIRATION))
     def get(self, request):
+        time.sleep(5)# имитация нагрузки
+        print('Новый запрос в базу данных..')
         cars = Car.objects.filter(on_main_page=True).select_related('brand').prefetch_related('images')
         serializer = CarSerializer(cars, many=True)
         return Response(data=serializer.data)
 
 
 class CategoryListView(APIView):
+    @method_decorator(cache_page(CACHE_EXPIRATION))
     def get(self, request):
+        time.sleep(5)# имитация нагрузки
+        print('Новый запрос в базу данных..')
         categories = Category.objects.filter(is_active=True).prefetch_related('service_set')
         serializer = CategorySerializer(categories, many=True)
         return Response(data=serializer.data)
