@@ -6,31 +6,142 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='Car',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('brand', models.CharField(max_length=100, verbose_name='Марка')),
                 ('model', models.CharField(max_length=100, verbose_name='Модель')),
-                ('year', models.IntegerField(validators=[django.core.validators.MinValueValidator(1900), django.core.validators.MaxValueValidator(2026)], verbose_name='Год выпуска')),
-                ('color', models.CharField(choices=[('white', 'Белый'), ('black', 'Чёрный'), ('silver', 'Серебристый'), ('gray', 'Серый'), ('red', 'Красный'), ('blue', 'Синий'), ('green', 'Зелёный'), ('brown', 'Коричневый'), ('beige', 'Бежевый'), ('yellow', 'Жёлтый'), ('orange', 'Оранжевый'), ('other', 'Другой')], default='other', max_length=20, verbose_name='Цвет')),
-                ('body_type', models.CharField(choices=[('sedan', 'Седан'), ('suv', 'Внедорожник'), ('hatchback', 'Хэтчбек'), ('wagon', 'Универсал'), ('coupe', 'Купе'), ('convertible', 'Кабриолет'), ('minivan', 'Минивэн'), ('pickup', 'Пикап'), ('crossover', 'Кроссовер')], max_length=20, verbose_name='Тип кузова')),
+                (
+                    'year',
+                    models.IntegerField(
+                        validators=[
+                            django.core.validators.MinValueValidator(1900),
+                            django.core.validators.MaxValueValidator(2026),
+                        ],
+                        verbose_name='Год выпуска',
+                    ),
+                ),
+                (
+                    'color',
+                    models.CharField(
+                        choices=[
+                            ('white', 'Белый'),
+                            ('black', 'Чёрный'),
+                            ('silver', 'Серебристый'),
+                            ('gray', 'Серый'),
+                            ('red', 'Красный'),
+                            ('blue', 'Синий'),
+                            ('green', 'Зелёный'),
+                            ('brown', 'Коричневый'),
+                            ('beige', 'Бежевый'),
+                            ('yellow', 'Жёлтый'),
+                            ('orange', 'Оранжевый'),
+                            ('other', 'Другой'),
+                        ],
+                        default='other',
+                        max_length=20,
+                        verbose_name='Цвет',
+                    ),
+                ),
+                (
+                    'body_type',
+                    models.CharField(
+                        choices=[
+                            ('sedan', 'Седан'),
+                            ('suv', 'Внедорожник'),
+                            ('hatchback', 'Хэтчбек'),
+                            ('wagon', 'Универсал'),
+                            ('coupe', 'Купе'),
+                            ('convertible', 'Кабриолет'),
+                            ('minivan', 'Минивэн'),
+                            ('pickup', 'Пикап'),
+                            ('crossover', 'Кроссовер'),
+                        ],
+                        max_length=20,
+                        verbose_name='Тип кузова',
+                    ),
+                ),
                 ('engine', models.CharField(max_length=100, verbose_name='Двигатель')),
-                ('price', models.IntegerField(validators=[django.core.validators.MinValueValidator(1, message='Цена должна быть положительной')], verbose_name='Цена (Euro)')),
+                (
+                    'price',
+                    models.IntegerField(
+                        validators=[
+                            django.core.validators.MinValueValidator(
+                                1, message='Цена должна быть положительной'
+                            )
+                        ],
+                        verbose_name='Цена (Euro)',
+                    ),
+                ),
                 ('is_sold', models.BooleanField(default=False, verbose_name='Продано')),
-                ('fuel', models.CharField(choices=[('petrol', 'Бензин'), ('diesel', 'Дизель'), ('hybrid', 'Гибрид'), ('electric', 'Электро'), ('gas', 'Газ (LPG)')], max_length=20, verbose_name='Тип топлива')),
-                ('transmission', models.CharField(choices=[('manual', 'Механика'), ('automatic', 'Автомат'), ('cvt', 'Вариатор'), ('robot', 'Робот')], max_length=20, verbose_name='Трансмиссия')),
-                ('created_at', models.DateField(auto_now_add=True, verbose_name='Опубликовано')),
-                ('on_main_page', models.BooleanField(default=False, verbose_name='На главную')),
-                ('eco_sticker', models.CharField(blank=True, choices=[('zero', '0 (Cero emisiones)'), ('eco', 'ECO'), ('c', 'C'), ('b', 'B')], max_length=20, null=True, verbose_name='Эконаклейка')),
-                ('available', models.BooleanField(default=True, verbose_name='В наличии')),
+                (
+                    'fuel',
+                    models.CharField(
+                        choices=[
+                            ('petrol', 'Бензин'),
+                            ('diesel', 'Дизель'),
+                            ('hybrid', 'Гибрид'),
+                            ('electric', 'Электро'),
+                            ('gas', 'Газ (LPG)'),
+                        ],
+                        max_length=20,
+                        verbose_name='Тип топлива',
+                    ),
+                ),
+                (
+                    'transmission',
+                    models.CharField(
+                        choices=[
+                            ('manual', 'Механика'),
+                            ('automatic', 'Автомат'),
+                            ('cvt', 'Вариатор'),
+                            ('robot', 'Робот'),
+                        ],
+                        max_length=20,
+                        verbose_name='Трансмиссия',
+                    ),
+                ),
+                (
+                    'created_at',
+                    models.DateField(auto_now_add=True, verbose_name='Опубликовано'),
+                ),
+                (
+                    'on_main_page',
+                    models.BooleanField(default=False, verbose_name='На главную'),
+                ),
+                (
+                    'eco_sticker',
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ('zero', '0 (Cero emisiones)'),
+                            ('eco', 'ECO'),
+                            ('c', 'C'),
+                            ('b', 'B'),
+                        ],
+                        max_length=20,
+                        null=True,
+                        verbose_name='Эконаклейка',
+                    ),
+                ),
+                (
+                    'available',
+                    models.BooleanField(default=True, verbose_name='В наличии'),
+                ),
             ],
             options={
                 'verbose_name': 'Автомобиль',
@@ -40,9 +151,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('name', models.CharField(max_length=100, verbose_name='Название')),
-                ('is_active', models.BooleanField(default=True, verbose_name='Активна')),
+                (
+                    'is_active',
+                    models.BooleanField(default=True, verbose_name='Активна'),
+                ),
             ],
             options={
                 'verbose_name': 'Категория',
@@ -52,10 +174,35 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Service',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('name', models.CharField(max_length=200, verbose_name='Название')),
-                ('price', models.IntegerField(validators=[django.core.validators.MinValueValidator(1, message='Цена должна быть положительной')], verbose_name='Цена')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.category', verbose_name='Категория')),
+                (
+                    'price',
+                    models.IntegerField(
+                        validators=[
+                            django.core.validators.MinValueValidator(
+                                1, message='Цена должна быть положительной'
+                            )
+                        ],
+                        verbose_name='Цена',
+                    ),
+                ),
+                (
+                    'category',
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to='api.category',
+                        verbose_name='Категория',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'Услуга',

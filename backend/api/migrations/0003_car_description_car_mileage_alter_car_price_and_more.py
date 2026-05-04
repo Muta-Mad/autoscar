@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('api', '0002_brand_remove_car_engine_car_engine_capacity_and_more'),
     ]

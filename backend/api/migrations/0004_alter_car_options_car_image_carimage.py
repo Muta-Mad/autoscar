@@ -5,59 +5,58 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ("api", "0003_car_description_car_mileage_alter_car_price_and_more"),
+        ('api', '0003_car_description_car_mileage_alter_car_price_and_more'),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name="car",
+            name='car',
             options={
-                "ordering": ("price",),
-                "verbose_name": "Автомобиль",
-                "verbose_name_plural": "Автомобили",
+                'ordering': ('price',),
+                'verbose_name': 'Автомобиль',
+                'verbose_name_plural': 'Автомобили',
             },
         ),
         migrations.AddField(
-            model_name="car",
-            name="image",
+            model_name='car',
+            name='image',
             field=models.ImageField(
                 blank=True,
                 null=True,
-                upload_to="cars/main/",
-                verbose_name="Главное фото",
+                upload_to='cars/main/',
+                verbose_name='Главное фото',
             ),
         ),
         migrations.CreateModel(
-            name="CarImage",
+            name='CarImage',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.BigAutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
                 (
-                    "image",
-                    models.ImageField(upload_to="cars/gallery/", verbose_name="Фото"),
+                    'image',
+                    models.ImageField(upload_to='cars/gallery/', verbose_name='Фото'),
                 ),
                 (
-                    "car",
+                    'car',
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="images",
-                        to="api.car",
-                        verbose_name="Автомобиль",
+                        related_name='images',
+                        to='api.car',
+                        verbose_name='Автомобиль',
                     ),
                 ),
             ],
             options={
-                "verbose_name": "Фото",
-                "verbose_name_plural": "Фотографии",
+                'verbose_name': 'Фото',
+                'verbose_name_plural': 'Фотографии',
             },
         ),
     ]

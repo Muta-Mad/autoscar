@@ -15,10 +15,25 @@ class CarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
         fields = (
-            'id', 'brand', 'model', 'year', 'color', 'body_type',
-            'price', 'is_sold', 'fuel', 'transmission', 'created_at',
-            'available', 'on_main_page', 'eco_sticker', 'engine_capacity',
-            'mileage', 'description', 'image', 'images'
+            'id',
+            'brand',
+            'model',
+            'year',
+            'color',
+            'body_type',
+            'price',
+            'is_sold',
+            'fuel',
+            'transmission',
+            'created_at',
+            'available',
+            'on_main_page',
+            'eco_sticker',
+            'engine_capacity',
+            'mileage',
+            'description',
+            'image',
+            'images',
         )
 
 
@@ -29,7 +44,7 @@ class ServiceSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    services = ServiceSerializer(many=True, read_only=True, source='service_set')
+    services = ServiceSerializer(many=True, read_only=True, source='service')
 
     class Meta:
         model = Category
