@@ -120,7 +120,9 @@ class Car(models.Model):
 
     available = models.BooleanField(verbose_name='В наличии', default=True)
 
-    description = models.TextField(verbose_name='Описание')
+    description = models.TextField(verbose_name='Описание (RU)')
+    description_en = models.TextField(verbose_name='Описание (EN)', blank=True, default='')
+    description_es = models.TextField(verbose_name='Описание (ES)', blank=True, default='')
 
     mileage = models.PositiveBigIntegerField(verbose_name='Пробег')
 
@@ -169,7 +171,9 @@ class Brand(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(verbose_name='Название', max_length=CAR_NAME_MAX_LENGTH)
+    name = models.CharField(verbose_name='Название (RU)', max_length=CAR_NAME_MAX_LENGTH)
+    name_en = models.CharField(verbose_name='Название (EN)', max_length=CAR_NAME_MAX_LENGTH, blank=True, default='')
+    name_es = models.CharField(verbose_name='Название (ES)', max_length=CAR_NAME_MAX_LENGTH, blank=True, default='')
 
     is_active = models.BooleanField(verbose_name='Активна', default=True)
 
@@ -189,9 +193,9 @@ class Service(models.Model):
         related_name='service',
     )
 
-    name = models.CharField(
-        verbose_name='Название',
-    )
+    name = models.CharField(verbose_name='Название (RU)', max_length=200)
+    name_en = models.CharField(verbose_name='Название (EN)', max_length=200, blank=True, default='')
+    name_es = models.CharField(verbose_name='Название (ES)', max_length=200, blank=True, default='')
 
     price = models.PositiveIntegerField(
         verbose_name='Цена',
