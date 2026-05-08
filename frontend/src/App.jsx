@@ -9,22 +9,20 @@ import WhyUs from './components/WhyUs';
 import Contacts from './components/Contacts';
 import Footer from './components/Footer';
 
-const ACCENT = '#E8401A';
-
 export default function App() {
   const [selectedCar, setSelectedCar] = useState(null);
 
   return (
     <LanguageProvider>
-      <Header accent={ACCENT} />
-      <Hero accent={ACCENT} />
-      <Services accent={ACCENT} />
-      <Catalog accent={ACCENT} onCarClick={setSelectedCar} />
-      <WhyUs accent={ACCENT} />
-      <Contacts accent={ACCENT} />
-      <Footer accent={ACCENT} />
+      <Header />
+      <Hero />
+      <Services />
+      <Catalog onCarClick={setSelectedCar} />
+      <WhyUs />
+      <Contacts />
+      <Footer />
       {selectedCar && (
-        <CarModal car={selectedCar} onClose={() => setSelectedCar(null)} accent={ACCENT} />
+        <CarModal car={selectedCar} onClose={() => setSelectedCar(null)} />
       )}
     </LanguageProvider>
   );

@@ -4,116 +4,79 @@ import CarPlaceholder from './CarPlaceholder';
 import { fetchCars, fetchBrands } from '../api';
 import { useLang } from '../LanguageContext';
 
-const ECO_COLORS = { zero: '#00B4D8', eco: '#27AE60', c: '#F2994A', b: '#6FCF97' };
 const ECO_LABELS = { zero: '0', eco: 'ECO', c: 'C', b: 'B' };
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = import.meta.env.VITE_API_URL;
 
 const YEAR = new Date().getFullYear();
 const YEAR_OPTIONS_VALUES = [];
 for (let y = YEAR; y >= 2000; y--) YEAR_OPTIONS_VALUES.push(y);
 
-function Select({ value, onChange, options, accent }) {
+function Select({ value, onChange, options }) {
   return (
     <select value={value} onChange={(e) => onChange(e.target.value)}
-      style={{
-        padding: '8px 12px', borderRadius: 8, fontSize: 13, fontWeight: 700,
-        background: value ? `${accent}15` : '#F2F1EF',
-        border: value ? `1.5px solid ${accent}` : '1.5px solid #E0E0DD',
-        cursor: 'pointer',
-        color: value ? accent : '#444', appearance: 'none', paddingRight: 28,
-        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`,
-        backgroundRepeat: 'no-repeat', backgroundPosition: 'right 10px center',
-      }}>
+      className={`catalog__select${value ? ' catalog__select--active' : ''}`}>
       {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
     </select>
   );
 }
 
-function PriceInput({ placeholder, value, onChange, accent }) {
+function PriceInput({ placeholder, value, onChange }) {
   return (
     <input
       type="number" placeholder={placeholder} value={value}
       onChange={(e) => onChange(e.target.value)}
-      style={{
-        padding: '8px 12px', borderRadius: 8, fontSize: 13, fontWeight: 700,
-        background: value ? `${accent}15` : '#F2F1EF',
-        border: value ? `1.5px solid ${accent}` : '1.5px solid #E0E0DD',
-        color: '#111', width: 110, outline: 'none',
-      }}
+      className={`catalog__input${value ? ' catalog__input--active' : ''}`}
     />
   );
 }
 
-function CarCard({ car, accent, onClick, tc }) {
+function CarCard({ car, onClick, tc }) {
   const available = car.available && !car.is_sold;
   const brandName = car.brand?.name ?? car.brand;
   const mainImage = car.image || car.images?.[0]?.image;
 
   return (
-    <div onClick={onClick} style={{
-      borderRadius: 16, overflow: 'hidden', cursor: 'pointer',
-      background: 'white', outline: '1.5px solid #EBEBEB',
-      transition: 'transform 0.22s, box-shadow 0.22s',
-      opacity: available ? 1 : 0.72,
-    }}
-      onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,0,0,0.13)'; }}
-      onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}>
-
-      <div style={{ height: 200, position: 'relative', overflow: 'hidden', background: '#1a1a1a' }}>
+    <div onClick={onClick} className={`car-card${available ? '' : ' car-card--sold'}`}>
+      <div className="car-card__img-wrap">
         {mainImage ? (
-          <img src={`${API_BASE}${mainImage}`} alt={`${brandName} ${car.model}`}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src={`${API_BASE}${mainImage}`} alt={`${brandName} ${car.model}`} className="car-card__img" />
         ) : (
-          <CarPlaceholder brand={brandName} model={car.model} style={{ position: 'absolute', inset: 0 }} />
+          <CarPlaceholder brand={brandName} model={car.model} className="car-placeholder--fill" />
         )}
-        <div style={{ position: 'absolute', top: 12, left: 12 }}>
-          <span style={{
-            display: 'inline-flex', alignItems: 'center', gap: 5,
-            background: available ? '#1a1a1a' : 'rgba(0,0,0,0.75)',
-            color: available ? '#6FCF97' : '#aaa',
-            padding: '5px 12px', borderRadius: 100, fontSize: 12, fontWeight: 700,
-            backdropFilter: 'blur(8px)',
-          }}>
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: available ? '#6FCF97' : '#888' }} />
-            {available ? tc.statusBadge.available : tc.statusBadge.sold}
-          </span>
-        </div>
-        {car.eco_sticker && ECO_COLORS[car.eco_sticker] && (
-          <div style={{
-            position: 'absolute', top: 12, right: 12,
-            background: ECO_COLORS[car.eco_sticker], color: 'white',
-            padding: '4px 10px', borderRadius: 100, fontSize: 11, fontWeight: 800,
-          }}>
+        <span className={`car-card__badge${available ? '' : ' car-card__badge--sold'}`}>
+          <span className={`car-card__badge-dot${available ? '' : ' car-card__badge-dot--sold'}`} />
+          {available ? tc.statusBadge.available : tc.statusBadge.sold}
+        </span>
+        {car.eco_sticker && ECO_LABELS[car.eco_sticker] && (
+          <div className={`car-card__eco car-card__eco--${car.eco_sticker}`}>
             {ECO_LABELS[car.eco_sticker]}
           </div>
         )}
       </div>
 
-      <div style={{ padding: '18px 20px 20px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+      <div className="car-card__body">
+        <div className="car-card__top">
           <div>
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#999', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{brandName}</div>
-            <h3 style={{ fontSize: 18, fontWeight: 800, color: '#111', letterSpacing: '-0.01em', lineHeight: 1.2 }}>{car.model}</h3>
+            <div className="car-card__brand">{brandName}</div>
+            <h3 className="car-card__model">{car.model}</h3>
           </div>
-          <div style={{ fontSize: 20, fontWeight: 900, color: accent, letterSpacing: '-0.02em', flexShrink: 0, marginLeft: 8 }}>
-            {car.price?.toLocaleString()} €
-          </div>
+          <div className="car-card__price">{car.price?.toLocaleString()} €</div>
         </div>
-        <div style={{ display: 'flex', gap: 16, marginTop: 12, flexWrap: 'wrap' }}>
+        <div className="car-card__specs">
           {[car.year, `${car.mileage?.toLocaleString()} ${tc.statusBadge.available === 'Available' ? 'km' : 'км'}`, car.fuel].map((v, i) => (
-            <span key={i} style={{ fontSize: 13, color: '#444', fontWeight: 400 }}>{v}</span>
+            <span key={i} className="car-card__spec">{v}</span>
           ))}
         </div>
-        <div style={{ marginTop: 16, paddingTop: 16, borderTop: '1px solid #F0F0EE', display: 'flex', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: 13, color: '#999', fontWeight: 500 }}>{car.transmission}</span>
-          <span style={{ fontSize: 13, fontWeight: 600, color: '#444' }}>{tc.details}</span>
+        <div className="car-card__footer">
+          <span className="car-card__transmission">{car.transmission}</span>
+          <span className="car-card__details">{tc.details}</span>
         </div>
       </div>
     </div>
   );
 }
 
-export default function Catalog({ accent, onCarClick }) {
+export default function Catalog({ onCarClick }) {
   const { t } = useLang();
   const tc = t.catalog;
 
@@ -227,60 +190,51 @@ export default function Catalog({ accent, onCarClick }) {
   ];
 
   return (
-    <section id="catalogo" style={{ background: 'white', padding: 'clamp(60px,8vw,100px) clamp(16px,5vw,60px)' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <SectionLabel accent={accent} text={tc.label} />
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, marginBottom: 24, marginTop: 12 }}>
-          <h2 style={{ fontSize: 'clamp(28px,5vw,52px)', fontWeight: 900, letterSpacing: '-0.025em' }}>{tc.title}</h2>
-          <div style={{ display: 'flex', gap: 8 }}>
+    <section id="catalogo" className="catalog">
+      <div className="container">
+        <SectionLabel text={tc.label} />
+        <div className="catalog__header">
+          <h2 className="catalog__title">{tc.title}</h2>
+          <div className="catalog__status-btns">
             {statusOptions.map(([v, l]) => (
-              <button key={v} onClick={() => setStatusFilter(v)} style={{
-                padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 600,
-                background: statusFilter === v ? accent : '#F2F1EF',
-                color: statusFilter === v ? 'white' : '#555',
-                transition: 'all 0.2s', border: 'none', cursor: 'pointer',
-              }}>{l}</button>
+              <button key={v} onClick={() => setStatusFilter(v)}
+                className={`catalog__status-btn${statusFilter === v ? ' catalog__status-btn--active' : ''}`}>
+                {l}
+              </button>
             ))}
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: 10, marginBottom: 40, flexWrap: 'wrap', alignItems: 'center' }}>
-          <Select value={brandFilter} onChange={setBrandFilter} options={brandOptions} accent={accent} />
-          <Select value={fuelFilter} onChange={setFuelFilter} options={fuelOptions} accent={accent} />
-          <Select value={transmissionFilter} onChange={setTransmissionFilter} options={transmissionOptions} accent={accent} />
-          <Select value={colorFilter} onChange={setColorFilter} options={colorOptions} accent={accent} />
-          <Select value={ecoFilter} onChange={setEcoFilter} options={ecoOptions} accent={accent} />
-          <Select value={yearFilter} onChange={setYearFilter} options={yearOptions} accent={accent} />
-          <PriceInput placeholder={tc.priceFrom} value={minPrice} onChange={setMinPrice} accent={accent} />
-          <PriceInput placeholder={tc.priceTo} value={maxPrice} onChange={setMaxPrice} accent={accent} />
-          <Select value={sortFilter} onChange={setSortFilter} options={sortOptions} accent={accent} />
+        <div className="catalog__filters">
+          <Select value={brandFilter} onChange={setBrandFilter} options={brandOptions} />
+          <Select value={fuelFilter} onChange={setFuelFilter} options={fuelOptions} />
+          <Select value={transmissionFilter} onChange={setTransmissionFilter} options={transmissionOptions} />
+          <Select value={colorFilter} onChange={setColorFilter} options={colorOptions} />
+          <Select value={ecoFilter} onChange={setEcoFilter} options={ecoOptions} />
+          <Select value={yearFilter} onChange={setYearFilter} options={yearOptions} />
+          <PriceInput placeholder={tc.priceFrom} value={minPrice} onChange={setMinPrice} />
+          <PriceInput placeholder={tc.priceTo} value={maxPrice} onChange={setMaxPrice} />
+          <Select value={sortFilter} onChange={setSortFilter} options={sortOptions} />
           {hasFilters && (
-            <button onClick={resetFilters}
-              style={{ padding: '8px 14px', borderRadius: 8, fontSize: 13, fontWeight: 600, color: '#999', background: 'none', border: '1.5px solid #E0E0DD', cursor: 'pointer' }}>
-              {tc.reset}
-            </button>
+            <button onClick={resetFilters} className="catalog__reset">{tc.reset}</button>
           )}
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '60px 0', color: '#999', fontSize: 16 }}>{tc.loading}</div>
+          <div className="catalog__empty">{tc.loading}</div>
         ) : cars.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '60px 0', color: '#999', fontSize: 16 }}>{tc.notFound}</div>
+          <div className="catalog__empty">{tc.notFound}</div>
         ) : (
           <>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
+            <div className="catalog__grid">
               {cars.map((car, i) => (
-                <CarCard key={`${car.brand?.name}-${car.model}-${car.year}-${i}`} car={car} accent={accent} onClick={() => onCarClick(car)} tc={tc} />
+                <CarCard key={`${car.brand?.name}-${car.model}-${car.year}-${i}`} car={car} onClick={() => onCarClick(car)} tc={tc} />
               ))}
             </div>
             {nextPage && (
-              <div style={{ textAlign: 'center', marginTop: 48 }}>
+              <div className="catalog__load-more">
                 <button onClick={loadMore} disabled={loadingMore}
-                  style={{
-                    padding: '14px 40px', borderRadius: 10, fontSize: 15, fontWeight: 700,
-                    background: loadingMore ? '#E0E0DD' : accent, color: 'white',
-                    border: 'none', cursor: loadingMore ? 'default' : 'pointer',
-                  }}>
+                  className={`catalog__load-btn${loadingMore ? ' catalog__load-btn--loading' : ''}`}>
                   {loadingMore ? tc.loading : tc.loadMore}
                 </button>
               </div>

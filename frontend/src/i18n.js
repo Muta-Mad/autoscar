@@ -117,6 +117,7 @@ const t = {
       whatsapp: 'Написать в WhatsApp',
       soldText: 'Этот автомобиль уже продан. Найти похожий для вас?',
       findSimilar: 'Найти похожий автомобиль',
+      ecoLabels: { zero: '0 выбросов', eco: 'ECO', c: 'ECO C', b: 'ECO B' },
     },
   },
 
@@ -238,6 +239,7 @@ const t = {
       whatsapp: 'Write on WhatsApp',
       soldText: 'This car has already been sold. Find a similar one for you?',
       findSimilar: 'Find a similar car',
+      ecoLabels: { zero: 'Zero emission', eco: 'ECO', c: 'ECO C', b: 'ECO B' },
     },
   },
 
@@ -359,6 +361,7 @@ const t = {
       whatsapp: 'Escribir por WhatsApp',
       soldText: 'Este coche ya ha sido vendido. ¿Buscamos uno similar para ti?',
       findSimilar: 'Buscar coche similar',
+      ecoLabels: { zero: 'Cero emisiones', eco: 'ECO', c: 'ECO C', b: 'ECO B' },
     },
   },
 };
