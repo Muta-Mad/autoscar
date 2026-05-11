@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import Logo from './Logo';
+import LegalModal from './LegalModal';
 import { useLang } from '../LanguageContext';
 
 export default function Footer() {
   const { t } = useLang();
+  const [legalType, setLegalType] = useState(null);
 
   return (
     <footer className="footer">
@@ -29,9 +32,18 @@ export default function Footer() {
         </div>
         <div className="footer__bottom">
           <div className="footer__copy">{t.footer.copyright}</div>
-          <div className="footer__copy">{t.footer.privacy}</div>
+          <div className="footer__legal-links">
+            <button onClick={() => setLegalType('privacy')} className="footer__legal-btn">
+              Política de privacidad
+            </button>
+            <span className="footer__legal-sep">·</span>
+            <button onClick={() => setLegalType('legal')} className="footer__legal-btn">
+              Aviso legal
+            </button>
+          </div>
         </div>
       </div>
+      {legalType && <LegalModal type={legalType} onClose={() => setLegalType(null)} />}
     </footer>
   );
 }

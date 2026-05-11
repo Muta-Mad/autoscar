@@ -249,6 +249,14 @@ a { text-decoration: none; color: inherit; }
 .footer__contact { font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 10px; font-weight: 400; }
 .footer__bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
 .footer__copy { font-size: 13px; color: rgba(255,255,255,0.25); font-weight: 400; }
+.footer__legal-links { display: flex; align-items: center; gap: 8px; }
+.footer__legal-btn { background: none; border: none; cursor: pointer; font-size: 13px; color: rgba(255,255,255,0.25); font-weight: 400; padding: 0; transition: color 0.2s; }
+.footer__legal-btn:hover { color: rgba(255,255,255,0.6); }
+.footer__legal-sep { font-size: 13px; color: rgba(255,255,255,0.15); }
+.legal-modal { background: white; border-radius: 20px; width: 100%; max-width: 680px; max-height: 85vh; overflow-y: auto; position: relative; padding: 40px 48px; }
+.legal-modal__title { font-size: 22px; font-weight: 800; color: #111; margin-bottom: 24px; }
+.legal-modal__heading { font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 20px; margin-bottom: 4px; }
+.legal-modal__text { font-size: 14px; color: #444; line-height: 1.7; margin: 0; }
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
