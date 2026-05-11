@@ -74,8 +74,8 @@ a { text-decoration: none; color: inherit; }
 .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; background: linear-gradient(160deg, #0D0D0D 0%, #1a1a1a 60%, #0f0f0f 100%); }
 .hero__grid { position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0); background-size: 40px 40px; pointer-events: none; }
 .hero__glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: rgba(var(--accent-rgb), 0.08); filter: blur(140px); top: 10%; right: -10%; pointer-events: none; }
-.hero__car-col { position: absolute; right: 0; top: 0; bottom: 0; width: 58%; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-.hero__content { max-width: 1280px; margin: 0 auto; padding: clamp(100px,14vw,160px) clamp(16px,5vw,60px) clamp(60px,8vw,100px); position: relative; width: 100%; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; }
+.hero__car-col { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 0.1; }
+.hero__content { max-width: 1280px; margin: 0 auto; padding: clamp(100px,14vw,160px) clamp(16px,5vw,60px) clamp(60px,8vw,100px); position: relative; width: 100%; display: grid; grid-template-columns: 1fr; align-items: center; gap: 40px; }
 .hero__badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(var(--accent-rgb), 0.09); border: 1px solid rgba(var(--accent-rgb), 0.2); border-radius: 100px; padding: 6px 14px; margin-bottom: 28px; }
 .hero__badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 .hero__badge-text { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
@@ -239,7 +239,7 @@ a { text-decoration: none; color: inherit; }
 
 /* === FOOTER === */
 .footer { background: #0D0D0D; padding: clamp(40px,6vw,64px) clamp(16px,5vw,60px) 28px; border-top: 1px solid rgba(255,255,255,0.06); }
-.footer__top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; margin-bottom: 48px; }
+.footer__top { display: flex; justify-content: flex-start; align-items: flex-start; flex-wrap: wrap; gap: 40px; margin-bottom: 48px; text-align: left; }
 .footer__brand { max-width: 280px; }
 .footer__desc { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.65; margin-top: 16px; font-weight: 400; }
 .footer__links { display: flex; gap: 64px; flex-wrap: wrap; }
@@ -265,4 +265,9 @@ a { text-decoration: none; color: inherit; }
   .nav__burger { display: flex !important; }
   .contacts__grid { grid-template-columns: 1fr !important; }
   .modal__specs { grid-template-columns: repeat(3, 1fr) !important; }
+  .hero__title { font-size: 22px !important; }
+  .hero__badge-text { font-size: 10px !important; }
+  .hero__badge { padding: 5px 10px !important; margin-bottom: 18px !important; }
+  .hero__content { grid-template-columns: 1fr !important; padding: 100px 20px 60px !important; }
+  .hero__car-col { width: 100% !important; opacity: 0.08 !important; }
 }
