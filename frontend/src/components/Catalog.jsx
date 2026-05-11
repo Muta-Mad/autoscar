@@ -63,7 +63,7 @@ function CarCard({ car, onClick, tc }) {
           <div className="car-card__price">{car.price?.toLocaleString()} €</div>
         </div>
         <div className="car-card__specs">
-          {[car.year, `${car.mileage?.toLocaleString()} ${tc.statusBadge.available === 'Available' ? 'km' : 'км'}`, car.fuel].map((v, i) => (
+          {[car.year, `${car.mileage?.toLocaleString()} ${tc.statusBadge.available === 'Available' ? 'km' : 'км'}`, tc.fuels[car.fuel] || car.fuel].map((v, i) => (
             <span key={i} className="car-card__spec">{v}</span>
           ))}
         </div>

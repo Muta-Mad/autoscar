@@ -54,7 +54,7 @@ export default function Services() {
                     {cat.services.map((svc) => (
                       <div key={svc.name} className="service-card__item">
                         <span className="service-card__item-name">{getName(svc)}</span>
-                        <span className="service-card__item-price">{svc.price} €</span>
+                        <span className="service-card__item-price">{t.services.from} {svc.price} €</span>
                       </div>
                     ))}
                     <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP}?text=Hola! Me interesa: ${getName(cat)}`}

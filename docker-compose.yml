@@ -11,10 +11,8 @@ services:
     volumes:
       - redis_data:/data
     env_file: ./.env
-    ports:
-      - "6379:6379"
     networks:
-    - postgres-net
+      - postgres-net
 
   db:
     image: "postgres:17-alpine"
@@ -23,7 +21,7 @@ services:
       - pg_data:/var/lib/postgresql/data
     env_file: ./.env
     networks:
-    - postgres-net
+      - postgres-net
 
   backend:
     build: ./backend/
@@ -35,10 +33,25 @@ services:
     volumes:
       - static:/backend_static
       - media:/app/media/
-    ports:
-    - "8000:8000"
     networks:
-    - postgres-net
+      - postgres-net
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+      args:
+        VITE_WHATSAPP: ${VITE_WHATSAPP:-34600000000}
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - static:/usr/share/nginx/django-static:ro
+      - media:/usr/share/nginx/media:ro
+    depends_on:
+      - backend
+    networks:
+      - postgres-net
 
 networks:
   postgres-net:

@@ -57,12 +57,22 @@ export default function CarModal({ car, onClose }) {
           )}
 
           {allImages.length > 1 && (
-            <div className="modal__dots">
-              {allImages.map((_, i) => (
-                <button key={i} onClick={() => setPhotoIdx(i)}
-                  className={`modal__dot${photoIdx === i ? ' modal__dot--active' : ''}`} />
-              ))}
-            </div>
+            <>
+              <button
+                className="modal__arrow modal__arrow--prev"
+                onClick={() => setPhotoIdx((photoIdx - 1 + allImages.length) % allImages.length)}
+              >‹</button>
+              <button
+                className="modal__arrow modal__arrow--next"
+                onClick={() => setPhotoIdx((photoIdx + 1) % allImages.length)}
+              >›</button>
+              <div className="modal__dots">
+                {allImages.map((_, i) => (
+                  <button key={i} onClick={() => setPhotoIdx(i)}
+                    className={`modal__dot${photoIdx === i ? ' modal__dot--active' : ''}`} />
+                ))}
+              </div>
+            </>
           )}
         </div>
 
@@ -83,10 +93,10 @@ export default function CarModal({ car, onClose }) {
           <div className="modal__specs">
             {[
               [tm.specs.engine, car.engine_capacity ? `${car.engine_capacity} cc` : '—'],
-              [tm.specs.transmission, car.transmission],
-              [tm.specs.body, car.body_type],
-              [tm.specs.fuel, car.fuel],
-              [tm.specs.color, car.color],
+              [tm.specs.transmission, t.catalog.transmissions[car.transmission] || car.transmission],
+              [tm.specs.body, t.catalog.bodyTypes[car.body_type] || car.body_type],
+              [tm.specs.fuel, t.catalog.fuels[car.fuel] || car.fuel],
+              [tm.specs.color, t.catalog.colors[car.color] || car.color],
               [tm.specs.year, car.year],
             ].map(([k, v]) => (
               <div key={k} className="modal__spec">

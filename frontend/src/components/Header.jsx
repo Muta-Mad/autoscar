@@ -52,31 +52,33 @@ export default function Header() {
         <a href="#hero" className="mobile-only">
           <Logo />
         </a>
-        <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-menu-btn">
-          {menuOpen ? '✕' : '☰'}
-        </button>
-      </div>
 
-      {menuOpen && (
-        <div className="mobile-menu">
-          {NAV_LINKS.map((l) => (
-            <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)} className="mobile-menu__link">
-              {l.label}
-            </a>
-          ))}
-          <div className="mobile-menu__lang">
-            {LANG_OPTIONS.map((l) => (
-              <button key={l} onClick={() => setLang(l)}
-                className={`mobile-menu__lang-btn${lang === l ? ' mobile-menu__lang-btn--active' : ''}`}>
-                {l}
-              </button>
-            ))}
-          </div>
-          <a href="https://t.me/AutosCarAlicante" target="_blank" rel="noreferrer" className="mobile-menu__tg-btn">
-            <TelegramIcon size={16} /> {t.nav.openTelegram}
-          </a>
+        <div className="nav__burger">
+          <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-menu-btn">
+            {menuOpen ? '✕' : '☰'}
+          </button>
+          {menuOpen && (
+            <div className="mobile-menu">
+              {NAV_LINKS.map((l) => (
+                <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)} className="mobile-menu__link">
+                  {l.label}
+                </a>
+              ))}
+              <div className="mobile-menu__lang">
+                {LANG_OPTIONS.map((l) => (
+                  <button key={l} onClick={() => setLang(l)}
+                    className={`mobile-menu__lang-btn${lang === l ? ' mobile-menu__lang-btn--active' : ''}`}>
+                    {l}
+                  </button>
+                ))}
+              </div>
+              <a href="https://t.me/AutosCarAlicante" target="_blank" rel="noreferrer" className="mobile-menu__tg-btn">
+                <TelegramIcon size={16} /> {t.nav.openTelegram}
+              </a>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </nav>
   );
 }

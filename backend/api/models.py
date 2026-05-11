@@ -1,5 +1,11 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
+
+
+def validate_image_size(image):
+    if image.size > 50 * 1024 * 1024:
+        raise ValidationError('Файл слишком большой. Максимальный размер — 50 МБ.')
 
 from api.constants import (
     CAR_YEAR_MIN,
@@ -131,6 +137,7 @@ class Car(models.Model):
         upload_to='cars/main/',
         null=True,
         blank=True,
+        validators=[validate_image_size],
     )
 
     class Meta:
@@ -149,6 +156,7 @@ class CarImage(models.Model):
     image = models.ImageField(
         verbose_name='Фото',
         upload_to='cars/gallery/',
+        validators=[validate_image_size],
     )
 
     class Meta:

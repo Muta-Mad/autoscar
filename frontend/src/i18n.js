@@ -11,9 +11,8 @@ const t = {
     },
     hero: {
       badge: 'Аликанте, Испания · С 2009 года',
-      title1: 'Авто в Испании',
-      title2: 'без лишних',
-      titleAccent: 'вопросов',
+      tagline1: 'не только',
+      tagline2: 'продажа авто',
       subtitle: 'Продажа подержанных автомобилей с гарантией, автосервис, шиномонтаж и помощь с документами. Работаем для русскоязычных клиентов.',
       cta: 'Смотреть каталог',
       contact: 'Написать нам',
@@ -21,7 +20,6 @@ const t = {
         ['15+', 'Лет опыта'],
         ['360+', 'Продано авто'],
         ['4.9★', 'Средний рейтинг'],
-        ['24ч', 'Среднее время ответа'],
       ],
     },
     whyUs: {
@@ -77,6 +75,10 @@ const t = {
         red: 'Красный', blue: 'Синий', green: 'Зелёный', brown: 'Коричневый',
         beige: 'Бежевый', yellow: 'Жёлтый', orange: 'Оранжевый', other: 'Другой',
       },
+      bodyTypes: {
+        sedan: 'Седан', hatchback: 'Хэтчбэк', suv: 'Внедорожник', coupe: 'Купе',
+        convertible: 'Кабриолет', wagon: 'Универсал', minivan: 'Минивэн', pickup: 'Пикап', crossover: 'Кроссовер',
+      },
       statusBadge: { available: 'В наличии', sold: 'Продано' },
     },
     services: {
@@ -84,6 +86,7 @@ const t = {
       title: 'Всё, что нужно вашему автомобилю',
       subtitle: 'Нажмите на любую услугу, чтобы увидеть подробный прайс-лист.',
       request: 'Запросить стоимость',
+      from: 'от',
     },
     contacts: {
       label: 'Контакты',
@@ -133,9 +136,8 @@ const t = {
     },
     hero: {
       badge: 'Alicante, Spain · Since 2009',
-      title1: 'Cars in Spain',
-      title2: 'without the',
-      titleAccent: 'hassle',
+      tagline1: 'more than',
+      tagline2: 'just car sales',
       subtitle: 'Used car sales with warranty, auto service, tyre fitting and document assistance. We serve Russian-speaking clients.',
       cta: 'Browse catalog',
       contact: 'Contact us',
@@ -143,7 +145,6 @@ const t = {
         ['15+', 'Years of experience'],
         ['360+', 'Cars sold'],
         ['4.9★', 'Average rating'],
-        ['24h', 'Avg. response time'],
       ],
     },
     whyUs: {
@@ -199,6 +200,10 @@ const t = {
         red: 'Red', blue: 'Blue', green: 'Green', brown: 'Brown',
         beige: 'Beige', yellow: 'Yellow', orange: 'Orange', other: 'Other',
       },
+      bodyTypes: {
+        sedan: 'Sedan', hatchback: 'Hatchback', suv: 'SUV', coupe: 'Coupe',
+        convertible: 'Convertible', wagon: 'Station Wagon', minivan: 'Minivan', pickup: 'Pickup', crossover: 'Crossover',
+      },
       statusBadge: { available: 'Available', sold: 'Sold' },
     },
     services: {
@@ -206,6 +211,7 @@ const t = {
       title: 'Everything your car needs',
       subtitle: 'Click on any service to see the detailed price list.',
       request: 'Request a quote',
+      from: 'from',
     },
     contacts: {
       label: 'Contacts',
@@ -255,9 +261,8 @@ const t = {
     },
     hero: {
       badge: 'Alicante, España · Desde 2009',
-      title1: 'Coches en España',
-      title2: 'sin',
-      titleAccent: 'complicaciones',
+      tagline1: 'más que',
+      tagline2: 'solo venta de coches',
       subtitle: 'Venta de coches de segunda mano con garantía, taller, cambio de neumáticos y gestión de documentos. Trabajamos para clientes de habla rusa.',
       cta: 'Ver catálogo',
       contact: 'Escríbenos',
@@ -265,7 +270,6 @@ const t = {
         ['15+', 'Años de experiencia'],
         ['360+', 'Coches vendidos'],
         ['4.9★', 'Valoración media'],
-        ['24h', 'Tiempo de respuesta'],
       ],
     },
     whyUs: {
@@ -321,6 +325,10 @@ const t = {
         red: 'Rojo', blue: 'Azul', green: 'Verde', brown: 'Marrón',
         beige: 'Beige', yellow: 'Amarillo', orange: 'Naranja', other: 'Otro',
       },
+      bodyTypes: {
+        sedan: 'Sedán', hatchback: 'Hatchback', suv: 'SUV', coupe: 'Coupé',
+        convertible: 'Descapotable', wagon: 'Familiar', minivan: 'Monovolumen', pickup: 'Pickup', crossover: 'Crossover',
+      },
       statusBadge: { available: 'Disponible', sold: 'Vendido' },
     },
     services: {
@@ -328,6 +336,7 @@ const t = {
       title: 'Todo lo que necesita tu coche',
       subtitle: 'Haz clic en cualquier servicio para ver la lista de precios detallada.',
       request: 'Solicitar precio',
+      from: 'desde',
     },
     contacts: {
       label: 'Contacto',

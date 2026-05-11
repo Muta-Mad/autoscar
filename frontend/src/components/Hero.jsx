@@ -32,8 +32,9 @@ export default function Hero() {
           </div>
 
           <h1 className="hero__title">
-            {t.hero.title1}<br />
-            {t.hero.title2} <span className="hero__title-accent">{t.hero.titleAccent}</span>
+            <span className="hero__title-autos">Autos</span><span className="hero__title-car">Car</span>
+            <span className="hero__title-dash"> —</span><br />
+            {t.hero.tagline1} {t.hero.tagline2}
           </h1>
 
           <p className="hero__subtitle">{t.hero.subtitle}</p>
