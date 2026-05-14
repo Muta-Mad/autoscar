@@ -1,15 +1,14 @@
 import os
-
 import django
-from django.contrib.auth.models import User
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'autoscar.settings')
+django.setup()
+
+from django.contrib.auth.models import User
 from api.models import Brand, Car, Category, Service
 from api.models import BodyType, FuelType, Transmission, Color, EcoSticker
 
 # --- Суперюзеры ---
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'autoscar.settings')
-django.setup()
 
 if not User.objects.filter(username='root').exists():
     User.objects.create_superuser(username='root', password='root', email='')

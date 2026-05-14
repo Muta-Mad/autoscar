@@ -1,5 +1,11 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
+
+
+def validate_image_size(image):
+    if image.size > 50 * 1024 * 1024:
+        raise ValidationError('Файл слишком большой. Максимальный размер — 50 МБ.')
 
 from api.constants import (
     CAR_YEAR_MIN,
@@ -120,7 +126,9 @@ class Car(models.Model):
 
     available = models.BooleanField(verbose_name='В наличии', default=True)
 
-    description = models.TextField(verbose_name='Описание')
+    description = models.TextField(verbose_name='Описание (RU)')
+    description_en = models.TextField(verbose_name='Описание (EN)', blank=True, default='')
+    description_es = models.TextField(verbose_name='Описание (ES)', blank=True, default='')
 
     mileage = models.PositiveBigIntegerField(verbose_name='Пробег')
 
@@ -129,6 +137,7 @@ class Car(models.Model):
         upload_to='cars/main/',
         null=True,
         blank=True,
+        validators=[validate_image_size],
     )
 
     class Meta:
@@ -147,6 +156,7 @@ class CarImage(models.Model):
     image = models.ImageField(
         verbose_name='Фото',
         upload_to='cars/gallery/',
+        validators=[validate_image_size],
     )
 
     class Meta:
@@ -169,7 +179,9 @@ class Brand(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(verbose_name='Название', max_length=CAR_NAME_MAX_LENGTH)
+    name = models.CharField(verbose_name='Название (RU)', max_length=CAR_NAME_MAX_LENGTH)
+    name_en = models.CharField(verbose_name='Название (EN)', max_length=CAR_NAME_MAX_LENGTH, blank=True, default='')
+    name_es = models.CharField(verbose_name='Название (ES)', max_length=CAR_NAME_MAX_LENGTH, blank=True, default='')
 
     is_active = models.BooleanField(verbose_name='Активна', default=True)
 
@@ -189,9 +201,9 @@ class Service(models.Model):
         related_name='service',
     )
 
-    name = models.CharField(
-        verbose_name='Название',
-    )
+    name = models.CharField(verbose_name='Название (RU)', max_length=200)
+    name_en = models.CharField(verbose_name='Название (EN)', max_length=200, blank=True, default='')
+    name_es = models.CharField(verbose_name='Название (ES)', max_length=200, blank=True, default='')
 
     price = models.PositiveIntegerField(
         verbose_name='Цена',
