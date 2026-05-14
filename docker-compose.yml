@@ -12,7 +12,7 @@ services:
       - redis_data:/data
     env_file: ./.env
     networks:
-      - postgres-net
+      - app-network
 
   db:
     image: "postgres:17-alpine"
@@ -21,7 +21,7 @@ services:
       - pg_data:/var/lib/postgresql/data
     env_file: ./.env
     networks:
-      - postgres-net
+      - app-network
 
   backend:
     build: ./backend/
@@ -34,24 +34,31 @@ services:
       - static:/backend_static
       - media:/app/media/
     networks:
-      - postgres-net
+      - app-network
 
-  nginx:
-    build:
-      context: .
-      dockerfile: nginx/Dockerfile
-      args:
-        VITE_WHATSAPP: ${VITE_WHATSAPP:-34600000000}
-    container_name: nginx
-    ports:
-      - "80:80"
-    volumes:
-      - static:/usr/share/nginx/django-static:ro
-      - media:/usr/share/nginx/media:ro
+  frontend:
+    build: ./frontend
+    container_name: frontend
     depends_on:
       - backend
     networks:
-      - postgres-net
+      - app-network
+
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - static:/staticfiles
+      - media:/media
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - app-network
 
 networks:
-  postgres-net:
+  app-network:
+    driver: bridge
