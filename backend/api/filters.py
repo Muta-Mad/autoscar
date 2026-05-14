@@ -1,8 +1,6 @@
-from django_filters import (
-    FilterSet, NumberFilter, OrderingFilter, ModelChoiceFilter
-)
+from django_filters import FilterSet, ModelChoiceFilter, NumberFilter, OrderingFilter
 
-from api.models import Car, Brand
+from api.models import Brand, Car
 
 
 class CarFilterSet(FilterSet):

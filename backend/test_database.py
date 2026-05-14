@@ -1,12 +1,15 @@
 import os
+
 import django
+
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'autoscar.settings')
 django.setup()
 
 from django.contrib.auth.models import User
-from api.models import Brand, Car, Category, Service
-from api.models import BodyType, FuelType, Transmission, Color, EcoSticker
+
+from api.models import BodyType, Brand, Car, Category, Color, EcoSticker, FuelType, Service, Transmission
+
 
 # --- Суперюзеры ---
 

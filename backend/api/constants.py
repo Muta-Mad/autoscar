@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 PAGE_SIZE = 6
 MAX_PAGE_SIZE = 48
 

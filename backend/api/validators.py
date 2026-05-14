@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 
 from api.constants import ALLOWED_EXTENSIONS, MAX_FILE_SIZE
 
+
 def validate_file_extension(file):
     """Проверка расширения загружаемого фото."""
     ext = file.name.split('.')[-1].lower()

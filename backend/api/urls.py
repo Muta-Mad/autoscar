@@ -1,9 +1,9 @@
-from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path
 
+from api.views import BrandListView, CarDetailView, CarListView, CarMain, ServiceListView
 
-from api.views import CarListView, CarDetailView, CarMain, ServiceListView, BrandListView
 
 urlpatterns = [
     path('cars/', CarListView.as_view()),

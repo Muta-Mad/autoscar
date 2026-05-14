@@ -2,6 +2,7 @@
 
 import django.core.validators
 import django.db.models.deletion
+
 from django.db import migrations, models
 
 
@@ -37,9 +38,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='car',
             name='engine_capacity',
-            field=models.PositiveIntegerField(
-                default=1, verbose_name='Объем двигателя'
-            ),
+            field=models.PositiveIntegerField(default=1, verbose_name='Объем двигателя'),
             preserve_default=False,
         ),
         migrations.AlterField(
@@ -47,12 +46,8 @@ class Migration(migrations.Migration):
             name='year',
             field=models.IntegerField(
                 validators=[
-                    django.core.validators.MinValueValidator(
-                        1900, message='год не может быть меньше чем:1900'
-                    ),
-                    django.core.validators.MaxValueValidator(
-                        2026, message='год не может быть больше чем:2026'
-                    ),
+                    django.core.validators.MinValueValidator(1900, message='год не может быть меньше чем:1900'),
+                    django.core.validators.MaxValueValidator(2026, message='год не может быть больше чем:2026'),
                 ],
                 verbose_name='Год выпуска',
             ),

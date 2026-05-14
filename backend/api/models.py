@@ -1,13 +1,13 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
 
-from api.validators import validate_file_extension, validate_file_size
 from api.constants import (
-    CAR_YEAR_MIN,
-    CAR_NAME_MAX_LENGTH,
     CAR_CHOICE_MAX_LENGTH,
+    CAR_NAME_MAX_LENGTH,
     CAR_YEAR_MAX,
+    CAR_YEAR_MIN,
 )
+from api.validators import validate_file_extension, validate_file_size
 
 
 class BodyType(models.TextChoices):
@@ -67,12 +67,8 @@ class Car(models.Model):
     year = models.IntegerField(
         verbose_name='Год выпуска',
         validators=[
-            MinValueValidator(
-                CAR_YEAR_MIN, message=f'год не может быть меньше чем:{CAR_YEAR_MIN}'
-            ),
-            MaxValueValidator(
-                CAR_YEAR_MAX, message=f'год не может быть больше чем:{CAR_YEAR_MAX}'
-            ),
+            MinValueValidator(CAR_YEAR_MIN, message=f'год не может быть меньше чем:{CAR_YEAR_MIN}'),
+            MaxValueValidator(CAR_YEAR_MAX, message=f'год не может быть больше чем:{CAR_YEAR_MAX}'),
         ],
     )
 
@@ -145,13 +141,11 @@ class Car(models.Model):
 
 
 class CarImage(models.Model):
-    car = models.ForeignKey(
-        Car, on_delete=models.CASCADE, related_name='images', verbose_name='Автомобиль'
-    )
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='images', verbose_name='Автомобиль')
     image = models.ImageField(
         verbose_name='Фото',
         upload_to='cars/gallery/',
-        validators=[validate_image_size],
+        validators=[validate_file_size],
     )
 
     class Meta:

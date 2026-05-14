@@ -2,6 +2,7 @@
 
 import django.core.validators
 import django.db.models.deletion
+
 from django.db import migrations, models
 
 
@@ -80,9 +81,7 @@ class Migration(migrations.Migration):
                     'price',
                     models.IntegerField(
                         validators=[
-                            django.core.validators.MinValueValidator(
-                                1, message='Цена должна быть положительной'
-                            )
+                            django.core.validators.MinValueValidator(1, message='Цена должна быть положительной')
                         ],
                         verbose_name='Цена (Euro)',
                     ),
@@ -188,9 +187,7 @@ class Migration(migrations.Migration):
                     'price',
                     models.IntegerField(
                         validators=[
-                            django.core.validators.MinValueValidator(
-                                1, message='Цена должна быть положительной'
-                            )
+                            django.core.validators.MinValueValidator(1, message='Цена должна быть положительной')
                         ],
                         verbose_name='Цена',
                     ),
