@@ -17,12 +17,6 @@ export default function Footer() {
           </div>
           <div className="footer__links">
             <div>
-              <div className="footer__col-label">{t.footer.services}</div>
-              {t.footer.links.map((s) => (
-                <div key={s} className="footer__link">{s}</div>
-              ))}
-            </div>
-            <div>
               <div className="footer__col-label">{t.footer.contacts}</div>
               <div className="footer__contact">t.me/AutosCarAlicante</div>
               <div className="footer__contact">+34 600 000 000</div>

@@ -86,7 +86,8 @@ export default function Catalog({ onCarClick }) {
   const [transmissionFilter, setTransmissionFilter] = useState('');
   const [ecoFilter, setEcoFilter] = useState('');
   const [colorFilter, setColorFilter] = useState('');
-  const [yearFilter, setYearFilter] = useState('');
+  const [minYear, setMinYear] = useState(2000);
+  const [maxYear, setMaxYear] = useState(YEAR);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [sortFilter, setSortFilter] = useState('');
@@ -100,11 +101,13 @@ export default function Catalog({ onCarClick }) {
     fetchBrands().then((data) => setBrands(data.results || data)).catch(() => {});
   }, []);
 
-  const hasFilters = brandFilter || fuelFilter || transmissionFilter || ecoFilter || colorFilter || yearFilter || minPrice || maxPrice || sortFilter;
+  const yearChanged = minYear !== 2000 || maxYear !== YEAR;
+  const hasFilters = brandFilter || fuelFilter || transmissionFilter || ecoFilter || colorFilter || yearChanged || minPrice || maxPrice || sortFilter;
 
   const resetFilters = () => {
     setBrandFilter(''); setFuelFilter(''); setTransmissionFilter('');
-    setEcoFilter(''); setColorFilter(''); setYearFilter('');
+    setEcoFilter(''); setColorFilter('');
+    setMinYear(2000); setMaxYear(YEAR);
     setMinPrice(''); setMaxPrice(''); setSortFilter('');
   };
 
@@ -120,7 +123,8 @@ export default function Catalog({ onCarClick }) {
     if (transmissionFilter) params.transmission = transmissionFilter;
     if (ecoFilter) params.eco_sticker = ecoFilter;
     if (colorFilter) params.color = colorFilter;
-    if (yearFilter) params.year = yearFilter;
+    if (minYear !== 2000) params.min_year = minYear;
+    if (maxYear !== YEAR) params.max_year = maxYear;
     if (minPrice) params.min_price = minPrice;
     if (maxPrice) params.max_price = maxPrice;
     if (sortFilter) params.ordering = sortFilter;
@@ -129,7 +133,7 @@ export default function Catalog({ onCarClick }) {
       .then((data) => { setCars(data.results || data); setNextPage(data.next || null); })
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, [statusFilter, brandFilter, fuelFilter, transmissionFilter, ecoFilter, colorFilter, yearFilter, minPrice, maxPrice, sortFilter]);
+  }, [statusFilter, brandFilter, fuelFilter, transmissionFilter, ecoFilter, colorFilter, minYear, maxYear, minPrice, maxPrice, sortFilter]);
 
   const loadMore = async () => {
     if (!nextPage) return;
@@ -172,11 +176,6 @@ export default function Catalog({ onCarClick }) {
     { value: 'b', label: 'B' },
   ];
 
-  const yearOptions = [
-    { value: '', label: tc.year },
-    ...YEAR_OPTIONS_VALUES.map((y) => ({ value: y, label: y })),
-  ];
-
   const sortOptions = [
     { value: '', label: tc.sort },
     { value: 'price', label: tc.sortPriceAsc },
@@ -211,7 +210,12 @@ export default function Catalog({ onCarClick }) {
           <Select value={transmissionFilter} onChange={setTransmissionFilter} options={transmissionOptions} />
           <Select value={colorFilter} onChange={setColorFilter} options={colorOptions} />
           <Select value={ecoFilter} onChange={setEcoFilter} options={ecoOptions} />
-          <Select value={yearFilter} onChange={setYearFilter} options={yearOptions} />
+          <input type="number" placeholder={tc.yearFrom} value={minYear === 2000 ? '' : minYear}
+            onChange={(e) => setMinYear(e.target.value ? +e.target.value : 2000)}
+            className={`catalog__input${minYear !== 2000 ? ' catalog__input--active' : ''}`} />
+          <input type="number" placeholder={tc.yearTo} value={maxYear === YEAR ? '' : maxYear}
+            onChange={(e) => setMaxYear(e.target.value ? +e.target.value : YEAR)}
+            className={`catalog__input${maxYear !== YEAR ? ' catalog__input--active' : ''}`} />
           <PriceInput placeholder={tc.priceFrom} value={minPrice} onChange={setMinPrice} />
           <PriceInput placeholder={tc.priceTo} value={maxPrice} onChange={setMaxPrice} />
           <Select value={sortFilter} onChange={setSortFilter} options={sortOptions} />
