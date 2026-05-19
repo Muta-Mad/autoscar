@@ -44,10 +44,6 @@ flake8-quotes.inline-quotes = "single"
 "*/migrations/*.py" = ["D101", "E501", "RUF012", "Q000"]
 "tests/*.py" = ["S101"]
 "*/models.py" = ["D105"]
-"test_database.py" = ["E402"]
-"/app/test_database.py" = ["E402"]  
-"./test_database.py" = ["E402"]
-"test_database.py" = ["ALL"] 
 
 [tool.ruff.format]
 quote-style = "single"
