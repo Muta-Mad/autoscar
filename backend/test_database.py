@@ -1,17 +1,11 @@
+# ruff: noqa
 import os
-
 import django
-
+from django.contrib.auth.models import User
+from api.models import BodyType, Brand, Car, Category, Color, EcoSticker, FuelType, Service, Transmission 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'autoscar.settings')
 django.setup()
-
-from django.contrib.auth.models import User
-
-from api.models import BodyType, Brand, Car, Category, Color, EcoSticker, FuelType, Service, Transmission
-
-
-# --- Суперюзеры ---
 
 if not User.objects.filter(username='root').exists():
     User.objects.create_superuser(username='root', password='root', email='')
