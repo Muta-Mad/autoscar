@@ -24,7 +24,7 @@ services:
       - app-network
 
   backend:
-    build: ./backend/
+    image: t1max/autoscar_backend:latest
     container_name: backend
     env_file: ./.env
     depends_on:
@@ -37,16 +37,18 @@ services:
       - app-network
 
   frontend:
-    build: ./frontend
+    image: t1max/autoscar_frontend:latest
     container_name: frontend
     depends_on:
       - backend
+    command: cp -r /app/dist/. /static/
+    volumes:
+      - static:/static/
     networks:
       - app-network
 
-
   nginx:
-    build: ./nginx
+    image: t1max/autoscar_nginx:latest
     container_name: nginx
     ports:
       - "8000:80"
