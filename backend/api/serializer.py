@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.models import Car, CarImage, Category, Service, Brand
+from api.models import Brand, Car, CarImage, Category, Service
 
 
 class CarImageSerializer(serializers.ModelSerializer):

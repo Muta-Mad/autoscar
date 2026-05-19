@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from api.models import Brand, Car, CarImage, Service, Category
+from api.models import Brand, Car, CarImage, Category, Service
 
 
 class CarImageInline(admin.TabularInline):
@@ -18,14 +18,34 @@ class ServiceInline(admin.TabularInline):
 class CarAdmin(admin.ModelAdmin):
     inlines = [CarImageInline]
     fieldsets = (
-        (None, {
-            'fields': ('brand', 'model', 'year', 'color', 'body_type', 'engine_capacity',
-                       'fuel', 'transmission', 'mileage', 'price', 'eco_sticker',
-                       'available', 'is_sold', 'on_main_page', 'image'),
-        }),
-        ('Описание', {
-            'fields': ('description', 'description_en', 'description_es'),
-        }),
+        (
+            None,
+            {
+                'fields': (
+                    'brand',
+                    'model',
+                    'year',
+                    'color',
+                    'body_type',
+                    'engine_capacity',
+                    'fuel',
+                    'transmission',
+                    'mileage',
+                    'price',
+                    'eco_sticker',
+                    'available',
+                    'is_sold',
+                    'on_main_page',
+                    'image',
+                ),
+            },
+        ),
+        (
+            'Описание',
+            {
+                'fields': ('description', 'description_en', 'description_es'),
+            },
+        ),
     )
 
 

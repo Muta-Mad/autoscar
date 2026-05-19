@@ -1,5 +1,7 @@
 from pathlib import Path
-from decouple import config, Csv
+
+from decouple import Csv, config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -130,3 +132,8 @@ CACHES = {
         'LOCATION': config('REDIS_URL'),
     }
 }
+# на продакшене скрыть!!!
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]

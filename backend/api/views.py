@@ -1,14 +1,14 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from api.serializer import CarSerializer, CategorySerializer, BrandSerializer
-from api.models import Car, Category, Brand
-from api.filters import CarFilterSet
-from api.pagination import PageNumberPagination
 from api.constants import CACHE_EXPIRATION
+from api.filters import CarFilterSet
+from api.models import Brand, Car, Category
+from api.pagination import PageNumberPagination
+from api.serializer import BrandSerializer, CarSerializer, CategorySerializer
 
 
 class CarListView(APIView):
@@ -37,11 +37,7 @@ class CarDetailView(APIView):
 class CarMain(APIView):
     @method_decorator(cache_page(CACHE_EXPIRATION))
     def get(self, request):
-        cars = (
-            Car.objects.filter(on_main_page=True)
-            .select_related('brand')
-            .prefetch_related('images')
-        )
+        cars = Car.objects.filter(on_main_page=True).select_related('brand').prefetch_related('images')
         serializer = CarSerializer(cars, many=True)
         return Response(data=serializer.data)
 
