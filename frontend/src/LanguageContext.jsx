@@ -4,7 +4,7 @@ import t from './i18n';
 const LanguageContext = createContext(null);
 
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState('ru');
+  const [lang, setLang] = useState('es');
   return (
     <LanguageContext.Provider value={{ lang, setLang, t: t[lang] }}>
       {children}

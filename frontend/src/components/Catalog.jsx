@@ -5,7 +5,6 @@ import { fetchCars, fetchBrands } from '../api';
 import { useLang } from '../LanguageContext';
 
 const ECO_LABELS = { zero: '0', eco: 'ECO', c: 'C', b: 'B' };
-const API_BASE = import.meta.env.VITE_API_URL;
 
 const YEAR = new Date().getFullYear();
 const YEAR_OPTIONS_VALUES = [];
@@ -39,7 +38,7 @@ function CarCard({ car, onClick, tc }) {
     <div onClick={onClick} className={`car-card${available ? '' : ' car-card--sold'}`}>
       <div className="car-card__img-wrap">
         {mainImage ? (
-          <img src={`${API_BASE}${mainImage}`} alt={`${brandName} ${car.model}`} className="car-card__img" />
+          <img src={mainImage} alt={`${brandName} ${car.model}`} className="car-card__img" />
         ) : (
           <CarPlaceholder brand={brandName} model={car.model} className="car-placeholder--fill" />
         )}
@@ -210,6 +209,7 @@ export default function Catalog({ onCarClick }) {
           <Select value={transmissionFilter} onChange={setTransmissionFilter} options={transmissionOptions} />
           <Select value={colorFilter} onChange={setColorFilter} options={colorOptions} />
           <Select value={ecoFilter} onChange={setEcoFilter} options={ecoOptions} />
+          <Select value={sortFilter} onChange={setSortFilter} options={sortOptions} />
           <input type="number" placeholder={tc.yearFrom} value={minYear === 2000 ? '' : minYear}
             onChange={(e) => setMinYear(e.target.value ? +e.target.value : 2000)}
             className={`catalog__input${minYear !== 2000 ? ' catalog__input--active' : ''}`} />
@@ -218,7 +218,6 @@ export default function Catalog({ onCarClick }) {
             className={`catalog__input${maxYear !== YEAR ? ' catalog__input--active' : ''}`} />
           <PriceInput placeholder={tc.priceFrom} value={minPrice} onChange={setMinPrice} />
           <PriceInput placeholder={tc.priceTo} value={maxPrice} onChange={setMaxPrice} />
-          <Select value={sortFilter} onChange={setSortFilter} options={sortOptions} />
           {hasFilters && (
             <button onClick={resetFilters} className="catalog__reset">{tc.reset}</button>
           )}

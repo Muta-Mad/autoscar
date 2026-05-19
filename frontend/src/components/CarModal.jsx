@@ -4,7 +4,7 @@ import WhatsAppIcon from './icons/WhatsAppIcon';
 import TelegramIcon from './icons/TelegramIcon';
 import { useLang } from '../LanguageContext';
 
-const API_BASE = import.meta.env.VITE_API_URL;
+const WHATSAPP = '34610268321';
 
 export default function CarModal({ car, onClose }) {
   const [photoIdx, setPhotoIdx] = useState(0);
@@ -39,7 +39,7 @@ export default function CarModal({ car, onClose }) {
         <div className="modal__gallery">
           {allImages.length > 0 && allImages[photoIdx] ? (
             <img
-              src={`${API_BASE}${allImages[photoIdx].image}`}
+              src={allImages[photoIdx].image}
               alt={`${brandName} ${car.model}`}
             />
           ) : (
@@ -112,7 +112,7 @@ export default function CarModal({ car, onClose }) {
 
           {available ? (
             <div className="modal__cta">
-              <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP}?text=Hola! Me interesa el ${brandName} ${car.model} ${car.year}`}
+              <a href={`https://wa.me/${WHATSAPP}?text=Hola! Me interesa el ${brandName} ${car.model} ${car.year}`}
                 target="_blank" rel="noreferrer"
                 className="modal__btn-whatsapp">
                 <WhatsAppIcon size={20} /> {tm.whatsapp}
@@ -125,7 +125,7 @@ export default function CarModal({ car, onClose }) {
           ) : (
             <div className="modal__sold">
               <div className="modal__sold-text">{tm.soldText}</div>
-              <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP}?text=Здравствуйте! Ищу авто, похожее на ${brandName} ${car.model}. Есть что-то подобное?`}
+              <a href={`https://wa.me/${WHATSAPP}?text=Здравствуйте! Ищу авто, похожее на ${brandName} ${car.model}. Есть что-то подобное?`}
                 target="_blank" rel="noreferrer"
                 className="modal__btn-find">
                 {tm.findSimilar}

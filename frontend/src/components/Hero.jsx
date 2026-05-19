@@ -32,9 +32,12 @@ export default function Hero() {
           </div>
 
           <h1 className="hero__title">
-            <span className="hero__title-autos">Autos</span><span className="hero__title-car">Car</span>
-            <span className="hero__title-dash"> —</span><br />
-            {t.hero.tagline1} {t.hero.tagline2}
+            <span className="hero__title-brand">
+              <span className="hero__title-autos">Autos</span><span className="hero__title-car">Car</span>
+            </span>
+            <span className="hero__title-tagline">
+              {t.hero.tagline1} {t.hero.tagline2}
+            </span>
           </h1>
 
           <p className="hero__subtitle">{t.hero.subtitle}</p>

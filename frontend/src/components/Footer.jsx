@@ -19,7 +19,7 @@ export default function Footer() {
             <div>
               <div className="footer__col-label">{t.footer.contacts}</div>
               <div className="footer__contact">t.me/AutosCarAlicante</div>
-              <div className="footer__contact">+34 600 000 000</div>
+              <div className="footer__contact">+34 610 268 321</div>
               <div className="footer__contact">Alicante, España</div>
             </div>
           </div>

@@ -57,7 +57,7 @@ export default function Services() {
                         <span className="service-card__item-price">{t.services.from} {svc.price} €</span>
                       </div>
                     ))}
-                    <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP}?text=Hola! Me interesa: ${getName(cat)}`}
+                    <a href={`https://wa.me/${34610268321}?text=Hola! Me interesa: ${getName(cat)}`}
                       target="_blank" rel="noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       className="service-card__btn">
