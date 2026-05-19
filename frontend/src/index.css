@@ -75,11 +75,13 @@ a { text-decoration: none; color: inherit; }
 .hero__grid { position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0); background-size: 40px 40px; pointer-events: none; }
 .hero__glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: rgba(var(--accent-rgb), 0.08); filter: blur(140px); top: 10%; right: -10%; pointer-events: none; }
 .hero__car-col { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 0.1; }
-.hero__content { max-width: 1280px; margin: 0 auto; padding: clamp(100px,14vw,160px) clamp(16px,5vw,60px) clamp(60px,8vw,100px); position: relative; width: 100%; display: grid; grid-template-columns: 1fr; align-items: center; gap: 40px; }
+.hero__content { max-width: 1280px; margin: 0 auto; padding: clamp(68px,8vw,100px) clamp(16px,5vw,60px) clamp(60px,8vw,100px); position: relative; width: 100%; display: grid; grid-template-columns: 1fr; align-items: center; gap: 40px; }
 .hero__badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(var(--accent-rgb), 0.09); border: 1px solid rgba(var(--accent-rgb), 0.2); border-radius: 100px; padding: 6px 14px; margin-bottom: 28px; }
 .hero__badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 .hero__badge-text { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
-.hero__title { font-size: clamp(28px,4.5vw,58px); font-weight: 900; line-height: 1.15; letter-spacing: -0.03em; color: white; max-width: 900px; margin-bottom: 20px; }
+.hero__title { font-weight: 900; letter-spacing: -0.03em; color: white; margin-bottom: 20px; display: flex; flex-direction: column; gap: 0; }
+.hero__title-brand { font-size: clamp(60px, 13vw, 180px); line-height: 1; display: block; }
+.hero__title-tagline { font-size: clamp(24px, 4vw, 58px); line-height: 1.2; display: block; opacity: 0.9; }
 .hero__title-autos { color: white; }
 .hero__title-car { color: var(--accent); }
 .hero__title-dash { color: rgba(255,255,255,0.4); }
@@ -226,6 +228,8 @@ a { text-decoration: none; color: inherit; }
 .contact-card__icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .contact-card__icon--wa { background: #25D366; }
 .contact-card__icon--tg { background: #2AABEE; }
+.contact-card__icon--ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.contact-card__icon--phone { background: #1a1a1a; font-size: 20px; }
 .contact-card__icon--addr { background: #1a1a1a; font-size: 20px; }
 .contact-card__label { font-size: 12px; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 .contact-card__value { font-size: 17px; font-weight: 700; color: #111; }
@@ -265,7 +269,8 @@ a { text-decoration: none; color: inherit; }
   .nav__burger { display: flex !important; }
   .contacts__grid { grid-template-columns: 1fr !important; }
   .modal__specs { grid-template-columns: repeat(3, 1fr) !important; }
-  .hero__title { font-size: 22px !important; }
+  .hero__title-brand { font-size: clamp(50px, 14vw, 80px) !important; }
+  .hero__title-tagline { font-size: 16px !important; }
   .hero__badge-text { font-size: 10px !important; }
   .hero__badge { padding: 5px 10px !important; margin-bottom: 18px !important; }
   .hero__content { grid-template-columns: 1fr !important; padding: 100px 20px 60px !important; }

@@ -1,4 +1,4 @@
-const BASE = `${import.meta.env.VITE_API_URL}/api/v1`;
+const BASE = '/api/v1';
 
 export async function fetchCars(params = {}) {
   const clean = Object.fromEntries(

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Logo from './Logo';
-import TelegramIcon from './icons/TelegramIcon';
+import WhatsAppIcon from './icons/WhatsAppIcon';
 import { useLang } from '../LanguageContext';
 
 const LANG_OPTIONS = ['ru', 'en', 'es'];
@@ -36,8 +36,8 @@ export default function Header() {
               {l.label}
             </a>
           ))}
-          <a href="https://t.me/AutosCarAlicante" target="_blank" rel="noreferrer" className="nav__tg-btn">
-            <TelegramIcon size={16} /> {t.nav.telegram}
+          <a href={`https://wa.me/${34610268321}`} target="_blank" rel="noreferrer" className="nav__tg-btn">
+            <WhatsAppIcon size={16} /> WhatsApp
           </a>
           <div className="nav__lang">
             {LANG_OPTIONS.map((l) => (
@@ -72,8 +72,8 @@ export default function Header() {
                   </button>
                 ))}
               </div>
-              <a href="https://t.me/AutosCarAlicante" target="_blank" rel="noreferrer" className="mobile-menu__tg-btn">
-                <TelegramIcon size={16} /> {t.nav.openTelegram}
+              <a href={`https://wa.me/${34610268321}`} target="_blank" rel="noreferrer" className="mobile-menu__tg-btn">
+                <WhatsAppIcon size={16} /> WhatsApp
               </a>
             </div>
           )}
