@@ -40,7 +40,7 @@ SECRET_KEY=your-secret-key
 DEBUG=True
 ALLOWED_HOSTS=127.0.0.1,localhost
 
-POSTGRES_DB=autoscar
+POSTGRES_DB=db
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=your-password
 POSTGRES_HOST=db
