@@ -42,7 +42,7 @@ flake8-quotes.inline-quotes = "single"
 
 [tool.ruff.lint.per-file-ignores]
 "*/migrations/*.py" = ["D101", "E501", "RUF012", "Q000"]
-"tests/*.py" = ["S101"]
+"*/tests/*.py" = ["S101", "D100", "D101", "D102", "D103", "D107"]
 "*/models.py" = ["D105"]
 
 [tool.ruff.format]
