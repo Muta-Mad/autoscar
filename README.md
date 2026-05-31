@@ -129,22 +129,6 @@ CI/CD настроен через GitHub Actions. При пуше в `master`:
 | `USER` | Пользователь на сервере |
 | `SSH_KEY` | Приватный SSH-ключ |
 
-### Ручной деплой на сервер
-
-```bash
-# Скопировать .env на сервер
-scp .env user@your-server:~/autoscar/.env
-
-# Подключиться и запустить
-ssh user@your-server
-cd ~/autoscar
-sudo docker compose -f docker-compose.production.yml pull
-sudo docker compose -f docker-compose.production.yml up -d
-sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
-sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic --noinput
-```
-
----
 
 ## Структура проекта
 
