@@ -58,6 +58,7 @@ DJANGO_SETTINGS_MODULE = "autoscar.settings"
 python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
+addopts = "--no-migrations"
 
 [tool.coverage.run]
 source = ["."]

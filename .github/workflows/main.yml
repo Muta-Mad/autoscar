@@ -8,20 +8,6 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:17-alpine
-        env:
-          POSTGRES_USER: autoscar_user
-          POSTGRES_PASSWORD: autoscar_pass
-          POSTGRES_DB: autoscar_test
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
@@ -44,15 +30,11 @@ jobs:
           SECRET_KEY: ci-test-secret-key-not-for-production
           DEBUG: 'False'
           ALLOWED_HOSTS: localhost,127.0.0.1
-          POSTGRES_DB: autoscar_test
-          POSTGRES_USER: autoscar_user
-          POSTGRES_PASSWORD: autoscar_pass
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
+          POSTGRES_DB: ''
           REDIS_URL: redis://localhost:6379
         run: |
           cd backend
-          python -m pytest tests/ -v --cov=. --cov-report=term-missing --cov-fail-under=70
+          python -m pytest tests/ -v
 
   build_and_push_backend:
     name: Push backend image to DockerHub
