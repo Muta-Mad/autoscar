@@ -56,6 +56,7 @@ def test_services_returns_200(api_client):
     assert response.status_code == 200
 
 
+
 @pytest.mark.django_db
 def test_cars_main_returns_200(api_client):
     response = api_client.get('/api/v1/cars-main/')
