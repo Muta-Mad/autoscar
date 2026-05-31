@@ -29,7 +29,9 @@ class CarListView(APIView):
 class CarDetailView(APIView):
     @method_decorator(cache_page(CACHE_EXPIRATION))
     def get(self, request, id):
-        car = get_object_or_404(Car, id=id)
+        car = get_object_or_404(
+            Car.objects.select_related('brand').prefetch_related('images'), id=id
+        )
         serializer = CarSerializer(car)
         return Response(data=serializer.data)
 

@@ -53,14 +53,24 @@ exclude = []
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-# Coverage
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "autoscar.settings"
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+
 [tool.coverage.run]
-source = ["src"]
+source = ["."]
 omit = [
     "*/migrations/*",
     "*/tests/*",
     "*/__pycache__/*",
-    "*/settings/*",
+    "autoscar/settings.py",
+    "autoscar/wsgi.py",
+    "autoscar/asgi.py",
+    "manage.py",
+    "test_database.py",
+    "venv/*",
 ]
 
 [tool.coverage.report]
