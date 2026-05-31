@@ -23,7 +23,7 @@
 ### 1. Клонировать репозиторий
 
 ```bash
-git clone https://github.com/<your-username>/Autoscar.git
+git clone git@github.com:Muta-Mad/Autoscar.git
 cd Autoscar
 ```
 
