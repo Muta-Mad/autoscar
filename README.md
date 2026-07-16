@@ -71,11 +71,6 @@ docker compose exec backend python manage.py createsuperuser
 # Через Docker
 docker compose run --rm backend python -m pytest tests/ -v
 
-# Локально (без Docker)
-cd backend
-source venv/bin/activate
-SECRET_KEY=test DEBUG=False ALLOWED_HOSTS=localhost REDIS_URL=redis://localhost:6379 POSTGRES_DB= \
-  python -m pytest tests/ -v
 ```
 
 ---
