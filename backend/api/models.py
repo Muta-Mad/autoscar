@@ -85,7 +85,12 @@ class Car(models.Model):
         choices=BodyType.choices,
     )
 
-    engine_capacity = models.PositiveIntegerField(verbose_name='Объем двигателя')
+    engine_capacity = models.DecimalField(
+        verbose_name='Объем двигателя (л)',
+        max_digits=3,
+        decimal_places=1,
+        validators=[MinValueValidator(0)],
+    )
 
     price = models.PositiveIntegerField(verbose_name='Цена (Euro)')
 
@@ -196,6 +201,8 @@ class Service(models.Model):
 
     price = models.PositiveIntegerField(
         verbose_name='Цена',
+        null=True,
+        blank=True,
     )
 
     class Meta:

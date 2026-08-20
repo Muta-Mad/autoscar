@@ -2,6 +2,8 @@ import SectionLabel from './SectionLabel';
 import WhatsAppIcon from './icons/WhatsAppIcon';
 import TelegramIcon from './icons/TelegramIcon';
 import InstagramIcon from './icons/InstagramIcon';
+import TikTokIcon from './icons/TikTokIcon';
+import YouTubeIcon from './icons/YouTubeIcon';
 import { useLang } from '../LanguageContext';
 
 export default function Contacts() {
@@ -40,17 +42,23 @@ export default function Contacts() {
               <span className="contact-card__arrow">→</span>
             </a>
 
-            <a href="https://www.instagram.com/_autoscar_" target="_blank" rel="noreferrer" className="contact-card">
-              <div className="contact-card__icon contact-card__icon--ig">
-                <InstagramIcon size={22} color="white" />
+            <div className="contact-social">
+              <span className="contact-social__label">{t.contacts.social}</span>
+              <div className="contact-social__row">
+                <a href="https://www.instagram.com/_autoscar_" target="_blank" rel="noreferrer"
+                  className="contact-social__btn contact-social__btn--ig" aria-label="Instagram">
+                  <InstagramIcon size={18} color="white" />
+                </a>
+                <a href="https://www.tiktok.com/@autoscar_alicante" target="_blank" rel="noreferrer"
+                  className="contact-social__btn contact-social__btn--tt" aria-label="TikTok">
+                  <TikTokIcon size={18} color="white" />
+                </a>
+                <a href="https://www.youtube.com/@autoscaralicantesl" target="_blank" rel="noreferrer"
+                  className="contact-social__btn contact-social__btn--yt" aria-label="YouTube">
+                  <YouTubeIcon size={18} color="white" />
+                </a>
               </div>
-              <div>
-                <div className="contact-card__label">Instagram</div>
-                <div className="contact-card__value">@_autoscar_</div>
-                <div className="contact-card__sub">{t.contacts.instagram}</div>
-              </div>
-              <span className="contact-card__arrow">→</span>
-            </a>
+            </div>
 
             <a href="tel:+34610268321" className="contact-card">
               <div className="contact-card__icon contact-card__icon--phone">📞</div>

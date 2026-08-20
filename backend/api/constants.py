@@ -1,9 +1,6 @@
 from datetime import datetime
 
 
-PAGE_SIZE = 6
-MAX_PAGE_SIZE = 48
-
 CAR_YEAR_MAX = datetime.now().year
 CAR_YEAR_MIN = 1900
 CAR_NAME_MAX_LENGTH = 100
@@ -13,4 +10,4 @@ SERVICE_NAME_MAX_LENGTH = 200
 CACHE_EXPIRATION = 60
 
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'webp'}
-MAX_FILE_SIZE = 5 * 1024 * 1024
+MAX_FILE_SIZE = 6 * 1024 * 1024

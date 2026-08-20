@@ -1,4 +1,6 @@
 asgiref==3.11.1
+pytest==8.3.5
+pytest-django==4.10.0
 django-cors-headers==4.7.0
 Django==6.0.3
 django-filter==25.2
@@ -9,7 +11,5 @@ python-decouple==3.8
 redis==5.2.1
 ruff==0.15.12
 sqlparse==0.5.5
-pytest==8.3.4
-pytest-django==4.9.0
 pytest-cov==6.0.0
 factory-boy==3.3.1

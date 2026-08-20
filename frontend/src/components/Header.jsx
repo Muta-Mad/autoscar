@@ -53,7 +53,17 @@ export default function Header() {
           <Logo />
         </a>
 
-        <div className="nav__burger">
+        <div className="nav__mobile-actions mobile-only">
+          <div className="nav__lang">
+            {LANG_OPTIONS.map((l) => (
+              <button key={l} onClick={() => setLang(l)}
+                className={`nav__lang-btn${lang === l ? ' nav__lang-btn--active' : ''}`}>
+                {l}
+              </button>
+            ))}
+          </div>
+
+          <div className="nav__burger">
           <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-menu-btn">
             {menuOpen ? '✕' : '☰'}
           </button>
@@ -64,19 +74,12 @@ export default function Header() {
                   {l.label}
                 </a>
               ))}
-              <div className="mobile-menu__lang">
-                {LANG_OPTIONS.map((l) => (
-                  <button key={l} onClick={() => setLang(l)}
-                    className={`mobile-menu__lang-btn${lang === l ? ' mobile-menu__lang-btn--active' : ''}`}>
-                    {l}
-                  </button>
-                ))}
-              </div>
               <a href={`https://wa.me/${34610268321}`} target="_blank" rel="noreferrer" className="mobile-menu__tg-btn">
                 <WhatsAppIcon size={16} /> WhatsApp
               </a>
             </div>
           )}
+          </div>
         </div>
       </div>
     </nav>

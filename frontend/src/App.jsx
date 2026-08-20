@@ -8,6 +8,8 @@ import CarModal from './components/CarModal';
 import WhyUs from './components/WhyUs';
 import Contacts from './components/Contacts';
 import Footer from './components/Footer';
+import CookieBanner from './components/CookieBanner';
+import WhatsAppFloat from './components/WhatsAppFloat';
 
 export default function App() {
   const [selectedCar, setSelectedCar] = useState(null);
@@ -24,6 +26,8 @@ export default function App() {
       {selectedCar && (
         <CarModal car={selectedCar} onClose={() => setSelectedCar(null)} />
       )}
+      <WhatsAppFloat />
+      <CookieBanner />
     </LanguageProvider>
   );
 }

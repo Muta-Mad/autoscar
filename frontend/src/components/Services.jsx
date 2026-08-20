@@ -54,7 +54,9 @@ export default function Services() {
                     {cat.services.map((svc) => (
                       <div key={svc.name} className="service-card__item">
                         <span className="service-card__item-name">{getName(svc)}</span>
-                        <span className="service-card__item-price">{t.services.from} {svc.price} €</span>
+                        {svc.price != null && (
+                          <span className="service-card__item-price">{t.services.from} {svc.price} €</span>
+                        )}
                       </div>
                     ))}
                     <a href={`https://wa.me/${34610268321}?text=Hola! Me interesa: ${getName(cat)}`}

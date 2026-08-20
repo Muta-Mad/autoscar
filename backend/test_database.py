@@ -1,11 +1,12 @@
 # ruff: noqa
 import os
 import django
-from django.contrib.auth.models import User
-from api.models import BodyType, Brand, Car, Category, Color, EcoSticker, FuelType, Service, Transmission 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'autoscar.settings')
 django.setup()
+
+from django.contrib.auth.models import User
+from api.models import BodyType, Brand, Car, Category, Color, EcoSticker, FuelType, Service, Transmission
 
 if not User.objects.filter(username='root').exists():
     User.objects.create_superuser(username='root', password='root', email='')
@@ -51,7 +52,7 @@ if Car.objects.count() == 0:
             'year': 2022,
             'color': Color.WHITE,
             'body_type': BodyType.SEDAN,
-            'engine_capacity': 2500,
+            'engine_capacity': 2.5,
             'price': 22000,
             'is_sold': False,
             'fuel': FuelType.PETROL,
@@ -68,7 +69,7 @@ if Car.objects.count() == 0:
             'year': 2021,
             'color': Color.BLACK,
             'body_type': BodyType.SUV,
-            'engine_capacity': 3000,
+            'engine_capacity': 3.0,
             'price': 55000,
             'is_sold': False,
             'fuel': FuelType.DIESEL,
@@ -85,7 +86,7 @@ if Car.objects.count() == 0:
             'year': 2020,
             'color': Color.SILVER,
             'body_type': BodyType.HATCHBACK,
-            'engine_capacity': 1400,
+            'engine_capacity': 1.4,
             'price': 18500,
             'is_sold': True,
             'fuel': FuelType.PETROL,
@@ -102,7 +103,7 @@ if Car.objects.count() == 0:
             'year': 2023,
             'color': Color.GRAY,
             'body_type': BodyType.CROSSOVER,
-            'engine_capacity': 2500,
+            'engine_capacity': 2.5,
             'price': 38000,
             'is_sold': False,
             'fuel': FuelType.HYBRID,
@@ -136,7 +137,7 @@ if Car.objects.count() == 0:
             'year': 2019,
             'color': Color.RED,
             'body_type': BodyType.SEDAN,
-            'engine_capacity': 1500,
+            'engine_capacity': 1.5,
             'price': 31000,
             'is_sold': True,
             'fuel': FuelType.PETROL,
@@ -153,7 +154,7 @@ if Car.objects.count() == 0:
             'year': 2022,
             'color': Color.ORANGE,
             'body_type': BodyType.PICKUP,
-            'engine_capacity': 2000,
+            'engine_capacity': 2.0,
             'price': 42000,
             'is_sold': False,
             'fuel': FuelType.DIESEL,
@@ -170,7 +171,7 @@ if Car.objects.count() == 0:
             'year': 2021,
             'color': Color.BEIGE,
             'body_type': BodyType.CROSSOVER,
-            'engine_capacity': 1600,
+            'engine_capacity': 1.6,
             'price': 26500,
             'is_sold': False,
             'fuel': FuelType.GAS,
@@ -187,7 +188,7 @@ if Car.objects.count() == 0:
             'year': 2020,
             'color': Color.GREEN,
             'body_type': BodyType.WAGON,
-            'engine_capacity': 2000,
+            'engine_capacity': 2.0,
             'price': 48000,
             'is_sold': False,
             'fuel': FuelType.DIESEL,
@@ -204,7 +205,7 @@ if Car.objects.count() == 0:
             'year': 2018,
             'color': Color.YELLOW,
             'body_type': BodyType.COUPE,
-            'engine_capacity': 1800,
+            'engine_capacity': 1.8,
             'price': 21000,
             'is_sold': False,
             'fuel': FuelType.PETROL,

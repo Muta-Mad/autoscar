@@ -138,3 +138,8 @@ CORS_ALLOWED_ORIGINS = config(
     default='http://localhost:5173,http://localhost:3000',
     cast=Csv(),
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'api.pagination.PageNumberPagination',
+    'PAGE_SIZE': 6,
+}
