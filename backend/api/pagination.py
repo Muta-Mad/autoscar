@@ -1,9 +1,6 @@
-from rest_framework.pagination import PageNumberPagination
-
-from api.constants import MAX_PAGE_SIZE, PAGE_SIZE
+from rest_framework.pagination import PageNumberPagination as DRFPageNumberPagination
 
 
-class PageNumberPagination(PageNumberPagination):
-    page_size = PAGE_SIZE
+class PageNumberPagination(DRFPageNumberPagination):
     page_size_query_param = 'limit'
-    max_page_size = MAX_PAGE_SIZE
+    max_page_size = 48

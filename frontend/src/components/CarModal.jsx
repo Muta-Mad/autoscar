@@ -6,6 +6,42 @@ import { useLang } from '../LanguageContext';
 
 const WHATSAPP = '34610268321';
 
+function renderInline(text) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => (
+    part.startsWith('**') && part.endsWith('**')
+      ? <strong key={i}>{part.slice(2, -2)}</strong>
+      : part
+  ));
+}
+
+function renderDescription(text) {
+  return text.split(/\n{2,}/).map((block, i) => {
+    const lines = block
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean);
+    if (lines.length > 0 && lines.every((l) => l.startsWith("* "))) {
+      return (
+        <ul key={i} className="modal__description-list">
+          {lines.map((l, j) => (
+            <li key={j}>{renderInline(l.slice(2))}</li>
+          ))}
+        </ul>
+      );
+    }
+    return (
+      <p key={i}>
+        {lines.map((line, idx) => (
+          <span key={idx}>
+            {idx > 0 && <br />}
+            {renderInline(line)}
+          </span>
+        ))}
+      </p>
+    );
+  });
+}
+
 export default function CarModal({ car, onClose }) {
   const [photoIdx, setPhotoIdx] = useState(0);
   const { t, lang } = useLang();
@@ -92,7 +128,7 @@ export default function CarModal({ car, onClose }) {
 
           <div className="modal__specs">
             {[
-              [tm.specs.engine, car.engine_capacity ? `${car.engine_capacity} cc` : '—'],
+              [tm.specs.engine, Number(car.engine_capacity) > 0 ? `${car.engine_capacity} L` : '—'],
               [tm.specs.transmission, t.catalog.transmissions[car.transmission] || car.transmission],
               [tm.specs.body, t.catalog.bodyTypes[car.body_type] || car.body_type],
               [tm.specs.fuel, t.catalog.fuels[car.fuel] || car.fuel],
@@ -107,7 +143,7 @@ export default function CarModal({ car, onClose }) {
           </div>
 
           {description && (
-            <p className="modal__description">{description}</p>
+            <div className="modal__description">{renderDescription(description)}</div>
           )}
 
           {available ? (

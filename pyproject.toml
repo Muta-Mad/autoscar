@@ -53,13 +53,6 @@ exclude = []
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-[tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "autoscar.settings"
-python_files = "test_*.py"
-python_classes = "Test*"
-python_functions = "test_*"
-addopts = "--no-migrations"
-
 [tool.coverage.run]
 source = ["."]
 omit = [
@@ -91,3 +84,12 @@ exclude_lines = [
 known-first-party = ["api"]
 lines-after-imports = 2
 lines-between-types = 1
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "autoscar.settings_test"
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+testpaths = ["backend"]
+pythonpath = ["backend"]
+addopts = "--no-migrations"

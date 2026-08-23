@@ -14,4 +14,4 @@ def validate_file_extension(file):
 def validate_file_size(file):
     """Проверка размера загружаемого фото."""
     if file.size > MAX_FILE_SIZE:
-        raise ValidationError('Максимальный размер файла — 5MB')
+        raise ValidationError('Максимальный размер файла — 6MB')
